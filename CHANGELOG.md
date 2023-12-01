@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/flowck/dobermann-webapp/compare/v1.0.0...v1.0.1) (2023-12-01)
+
+
+### Bug Fixes
+
+* reenable the ci pipeline ([646bc76](https://github.com/flowck/dobermann-webapp/commit/646bc760eb8b42983d95e2b1d712e2b88915e094))
+
 # 1.0.0 (2023-12-01)
 
 

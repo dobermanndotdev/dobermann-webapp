@@ -5,12 +5,12 @@ on:
       - main
 
 jobs:
-  # ci:
-  #   uses: ./.github/workflows/ci.yml
+  ci:
+    uses: ./.github/workflows/ci.yml
 
   tag:
     uses: ./.github/workflows/tag.yml
-    #needs: ci
+    needs: ci
     secrets:
       PAT: ${{ secrets.PAT }}
 

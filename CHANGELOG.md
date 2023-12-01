@@ -1,6 +1,13 @@
 # 1.0.0 (2023-12-01)
 
 
+### Bug Fixes
+
+* semantic release config ([d6f196d](https://github.com/flowck/dobermann-webapp/commit/d6f196d5fb32d7a06c3e522ec6b0c649127a96c3))
+
+# 1.0.0 (2023-12-01)
+
+
 ### Features
 
 * **#10:** protect private endpoints ([#17](https://github.com/flowck/dobermann/issues/17)) ([9ab986b](https://github.com/flowck/dobermann/commit/9ab986b25459cf97ef2690365edcc2e9d5d4c2ae)), closes [#10](https://github.com/flowck/dobermann/issues/10)

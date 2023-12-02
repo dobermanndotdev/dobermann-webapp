@@ -4,21 +4,26 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "yarn openapi",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "echo 'Nothing yet...moving along'",
     "docker:build": "docker build -t dobermann.dev/webapp:latest .",
     "docker:run": "docker run -p 3100:3100 -e PORT=3100 dobermann.dev/webapp:latest",
-    "deploy:prd": "flyctl deploy --config ./fly.toml"
+    "deploy:prd": "flyctl deploy --config ./fly.toml",
+    "openapi": "npx @openapitools/openapi-generator-cli generate -i ./dobermann/api/openapi.yml -g typescript-axios -o ./libs/apiClient",
+    "submodule": "cd dobermann; git pull origin main"
   },
   "dependencies": {
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
-    "remixicon": "^3.6.0"
+    "remixicon": "^3.6.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.7.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

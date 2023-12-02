@@ -1,0 +1,3 @@
+[submodule "dobermann"]
+	path = dobermann
+	url = git@github.com:flowck/dobermann.git

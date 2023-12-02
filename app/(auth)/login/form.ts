@@ -3,22 +3,22 @@
 import { appConfig } from "@@/app/config";
 import { mapFormErrors } from "@@/libs";
 import { AuthApiFactory } from "@@/libs/apiClient";
+import { COOKIE_AUTH_TOKEN } from "@@/libs/contants";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const schema = z
   .object({
     email: z.string().email(),
-    account_name: z.string().min(3),
     password: z.string().min(12).max(64),
   })
   .required();
 
-export async function createAccountHandler(prevState: unknown, fields: FormData) {
+export async function loginHandler(prevState: unknown, fields: FormData) {
   const result = schema.safeParse({
     email: fields.get("email"),
     password: fields.get("password"),
-    account_name: fields.get("account_name"),
   });
 
   if (!result.success) {
@@ -26,11 +26,14 @@ export async function createAccountHandler(prevState: unknown, fields: FormData)
   }
 
   try {
-    await AuthApiFactory(undefined, appConfig.apiUrl).createAccount(result.data);
+    const resp = await AuthApiFactory(undefined, appConfig.apiUrl).login(result.data);
+    cookies().set(COOKIE_AUTH_TOKEN, resp.data.token, {
+      maxAge: 7 * 86400, // 7 days
+    });
   } catch (error) {
     //TODO: Handle this error properly
     return { fieldErrors: {}, message: "An error occurred, please try again" };
   }
 
-  redirect("/login?account-created=1");
+  redirect("/monitors");
 }

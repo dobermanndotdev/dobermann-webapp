@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/flowck/dobermann-webapp/compare/v1.0.1...v1.1.0) (2023-12-02)
+
+
+### Features
+
+* create account api integration ([#3](https://github.com/flowck/dobermann-webapp/issues/3)) ([9e0d23c](https://github.com/flowck/dobermann-webapp/commit/9e0d23c3202ba49575c098966a3d4ab3118028f6))
+
 ## [1.0.1](https://github.com/flowck/dobermann-webapp/compare/v1.0.0...v1.0.1) (2023-12-01)
 
 

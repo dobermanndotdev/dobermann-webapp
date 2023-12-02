@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/flowck/dobermann-webapp/compare/v1.2.0...v1.3.0) (2023-12-02)
+
+
+### Features
+
+* protect private pages ([#5](https://github.com/flowck/dobermann-webapp/issues/5)) ([3ab8211](https://github.com/flowck/dobermann-webapp/commit/3ab8211f07c920a8fb510cf39f5670a583a9f569))
+
 # [1.2.0](https://github.com/flowck/dobermann-webapp/compare/v1.1.0...v1.2.0) (2023-12-02)
 
 

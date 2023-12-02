@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/flowck/dobermann-webapp/compare/v1.3.0...v1.3.1) (2023-12-02)
+
+
+### Bug Fixes
+
+* **#6:** pre-build the http client before deployment ([6aaab53](https://github.com/flowck/dobermann-webapp/commit/6aaab537902250630e381408f699dc45b469fa1f)), closes [#6](https://github.com/flowck/dobermann-webapp/issues/6)
+
 # [1.3.0](https://github.com/flowck/dobermann-webapp/compare/v1.2.0...v1.3.0) (2023-12-02)
 
 

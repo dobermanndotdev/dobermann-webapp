@@ -5,9 +5,8 @@ export default async function MonitorsPage() {
     <>
       <ViewHeader title="Monitors">
         <span>
-          Websites and applications added to Cloudflare under this account are
-          listed here. Select one to update configurations or monitor security
-          and performance.
+          Websites and applications added to Cloudflare under this account are listed here. Select one to update
+          configurations or monitor security and performance.
         </span>
       </ViewHeader>
     </>

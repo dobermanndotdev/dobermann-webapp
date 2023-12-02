@@ -1,7 +1,7 @@
+import "@@/common/styles/globals.css";
 import type { Metadata } from "next";
-import "./globals.css";
-import "remixicon/fonts/remixicon.css";
 import { PropsWithChildren } from "react";
+import "remixicon/fonts/remixicon.css";
 
 export const metadata: Metadata = {
   title: "Dobermann",

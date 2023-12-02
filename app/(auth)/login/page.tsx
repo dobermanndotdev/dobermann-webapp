@@ -1,9 +1,9 @@
 "use client";
 
-import { Alert } from "@@/components/Alert";
-import { Heading } from "@@/components/Heading";
-import { InputField } from "@@/components/Input";
-import { SubmitButton } from "@@/components/SubmitButton";
+import { Alert } from "@@/common/components/Alert";
+import { Heading } from "@@/common/components/Heading";
+import { InputField } from "@@/common/components/Input";
+import { SubmitButton } from "@@/common/components/SubmitButton";
 import Link from "next/link";
 import { useFormState } from "react-dom";
 import { loginHandler } from "./form";

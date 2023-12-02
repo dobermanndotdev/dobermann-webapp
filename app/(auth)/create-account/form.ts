@@ -1,8 +1,8 @@
 "use server";
 
 import { appConfig } from "@@/app/config";
-import { mapFormErrors } from "@@/libs";
-import { AuthApiFactory } from "@@/libs/apiClient";
+import { mapFormErrors } from "@@/common/libs";
+import { AuthApiFactory } from "@@/common/libs/apiClient";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 

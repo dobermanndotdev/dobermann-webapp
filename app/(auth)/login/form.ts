@@ -1,9 +1,9 @@
 "use server";
 
 import { appConfig } from "@@/app/config";
-import { mapFormErrors } from "@@/libs";
-import { AuthApiFactory } from "@@/libs/apiClient";
-import { COOKIE_AUTH_TOKEN } from "@@/libs/contants";
+import { mapFormErrors } from "@@/common/libs";
+import { AuthApiFactory } from "@@/common/libs/apiClient";
+import { COOKIE_AUTH_TOKEN } from "@@/common/libs/contants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -35,5 +35,5 @@ export async function loginHandler(prevState: unknown, fields: FormData) {
     return { fieldErrors: {}, message: "An error occurred, please try again" };
   }
 
-  redirect("/monitors");
+  redirect("/dashboard/monitors");
 }

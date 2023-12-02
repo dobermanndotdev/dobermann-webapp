@@ -38,4 +38,4 @@ next-env.d.ts
 .vscode
 
 # Ignore the generated API client
-libs/apiClient
+common/libs/apiClient

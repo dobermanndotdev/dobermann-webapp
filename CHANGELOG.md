@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/flowck/dobermann-webapp/compare/v1.1.0...v1.2.0) (2023-12-02)
+
+
+### Features
+
+* add login view ([#4](https://github.com/flowck/dobermann-webapp/issues/4)) ([f61bb0f](https://github.com/flowck/dobermann-webapp/commit/f61bb0f808f4bf61de7446f8b883eb42d7e70b7a))
+
 # [1.1.0](https://github.com/flowck/dobermann-webapp/compare/v1.0.1...v1.1.0) (2023-12-02)
 
 

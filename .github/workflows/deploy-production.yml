@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 0.0.0 (semver)
+        description: v0.0.0 (semver)
         required: true
 
 jobs:
@@ -14,6 +14,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          submodules: true
           token: ${{ secrets.PAT }}
           ref: refs/tags/${{ inputs.version }}
 
@@ -22,6 +23,14 @@ jobs:
           version: 3.10.0
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Build the HTTP client from the OpenAPI spec
+        run: yarn openapi
 
       - name: Deploy to Production
         run: npm run deploy:prd

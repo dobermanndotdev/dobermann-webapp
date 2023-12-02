@@ -12,3 +12,5 @@ export function mapFormErrors(formErrors: typeToFlattenedError<Record<string, st
 
   return errors;
 }
+
+export function protectedPage() {}

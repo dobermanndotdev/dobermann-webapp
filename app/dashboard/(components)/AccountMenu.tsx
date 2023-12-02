@@ -1,12 +1,19 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { Icon } from "./Icon";
 
 export function AccountMenu() {
+  const router = useRouter();
+
+  const logoutHandler = async () => {
+    await fetch("/logout", { method: "DELETE" });
+    router.push("/login");
+  };
+
   return (
     <details className="dropdown dropdown-bottom dropdown-end h-full w-full">
-      <summary
-        role="button"
-        className="list-none h-full flex gap-1 items-center justify-center px-2 cursor-pointer"
-      >
+      <summary role="button" className="list-none h-full flex gap-1 items-center justify-center px-2 cursor-pointer">
         <Icon name="ri-user-fill" />
         <Icon name="ri-arrow-down-s-fill" />
       </summary>
@@ -21,7 +28,7 @@ export function AccountMenu() {
             <a>Account</a>
           </li>
           <li>
-            <a>Log out</a>
+            <button onClick={logoutHandler}>Log out</button>
           </li>
         </ul>
       </div>

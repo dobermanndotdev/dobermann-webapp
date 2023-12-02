@@ -1,10 +1,14 @@
+"use server";
+
 import { mapFormErrors } from "@@/libs";
+import { AuthApiFactory } from "@@/libs/apiClient";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const schema = z
   .object({
-    account_name: z.string().min(3),
     email: z.string().email(),
+    account_name: z.string().min(3),
     password: z.string().min(12).max(64),
   })
   .required();
@@ -17,8 +21,15 @@ export async function createAccountHandler(prevState: unknown, fields: FormData)
   });
 
   if (!result.success) {
-    return { errors: mapFormErrors(result.error.formErrors) };
+    return { fieldErrors: mapFormErrors(result.error.formErrors), message: "" };
   }
 
-  return { errors: {} };
+  try {
+    await AuthApiFactory(undefined, "https://api.dobermann.dev").createAccount(result.data);
+  } catch (error) {
+    //TODO: Handle this error properly
+    return { fieldErrors: {}, message: "An error occurred, please try again" };
+  }
+
+  redirect("/login?account-created=1");
 }

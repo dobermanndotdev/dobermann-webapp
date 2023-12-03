@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/flowck/dobermann-webapp/compare/v1.3.1...v1.4.0) (2023-12-03)
+
+
+### Features
+
+* **#30:** list monitors ([#7](https://github.com/flowck/dobermann-webapp/issues/7)) ([49e46b1](https://github.com/flowck/dobermann-webapp/commit/49e46b16e96e558c781a6ca2a09c50ba94e01a8d)), closes [#30](https://github.com/flowck/dobermann-webapp/issues/30)
+
 ## [1.3.1](https://github.com/flowck/dobermann-webapp/compare/v1.3.0...v1.3.1) (2023-12-02)
 
 

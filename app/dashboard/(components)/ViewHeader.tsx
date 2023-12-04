@@ -7,8 +7,8 @@ interface Props extends PropsWithChildren {
 
 export function ViewHeader({ children, title, CallToAction }: Props) {
   return (
-    <section>
-      <div className="flex justify-between items-center mb-6">
+    <section className="mb-6">
+      <div className="flex justify-between items-center">
         <h2 className="font-bold text-2xl">{title}</h2>
         {CallToAction}
       </div>

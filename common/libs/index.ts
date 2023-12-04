@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { typeToFlattenedError } from "zod";
 
 export function mapFormErrors(formErrors: typeToFlattenedError<Record<string, string>, string>) {
@@ -13,4 +14,12 @@ export function mapFormErrors(formErrors: typeToFlattenedError<Record<string, st
   return errors;
 }
 
-export function protectedPage() {}
+export function handleApiErrors(error: unknown): string {
+  const err = error as AxiosError;
+
+  if (err.response && err.response.data) {
+    return (err.response.data as { message: string }).message;
+  }
+
+  return "";
+}

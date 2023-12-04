@@ -11,6 +11,7 @@ interface Props {
 
 export default async function MonitorPage({ params }: Props) {
   const monitor = await getMonitor(params.monitorId);
+
   return (
     <>
       <ViewHeader title={monitor.endpoint_url}>
@@ -29,7 +30,7 @@ export default async function MonitorPage({ params }: Props) {
 
         <div className="stat border">
           <div className="stat-title">Incidents</div>
-          <div className="stat-value">0</div>
+          <div className="stat-value">{monitor.incidents.length}</div>
         </div>
       </div>
     </>

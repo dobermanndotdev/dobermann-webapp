@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/flowck/dobermann-webapp/compare/v1.5.0...v1.6.0) (2023-12-04)
+
+
+### Features
+
+* **#32:** add single page for monitors ([#10](https://github.com/flowck/dobermann-webapp/issues/10)) ([62532a3](https://github.com/flowck/dobermann-webapp/commit/62532a38283bfc13d9f88884287f366e6ebe6f41)), closes [#32](https://github.com/flowck/dobermann-webapp/issues/32)
+
 # [1.5.0](https://github.com/flowck/dobermann-webapp/compare/v1.4.0...v1.5.0) (2023-12-04)
 
 

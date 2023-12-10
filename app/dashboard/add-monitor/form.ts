@@ -1,5 +1,6 @@
 "use server";
 
+import { appConfig } from "@@/app/config";
 import { handleApiErrors, mapFormErrors } from "@@/common/libs";
 import { Configuration, MonitorsApiFactory } from "@@/common/libs/apiClient";
 import { COOKIE_AUTH_TOKEN } from "@@/common/libs/contants";
@@ -17,9 +18,9 @@ export async function addMonitorHandler(prevState: unknown, fields: FormData) {
 
   try {
     const token = cookies().get(COOKIE_AUTH_TOKEN);
-    await MonitorsApiFactory(new Configuration({ accessToken: token?.value })).createMonitor({
-      endpoint_url: result.data.endpoint_url,
-    });
+    const client = MonitorsApiFactory(new Configuration({ accessToken: token?.value, basePath: appConfig.apiUrl }));
+
+    await client.createMonitor(result.data);
   } catch (error) {
     return { fieldErrors: {}, message: handleApiErrors(error) };
   }

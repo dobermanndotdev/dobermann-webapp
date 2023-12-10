@@ -9,6 +9,9 @@ primary_region = "lhr"
 [build]
   dockerfile = "./Dockerfile"
 
+[build.args]
+  NEXT_PUBLIC_API_ARG = "https://api.dobermann.dev"
+
 [http_service]
   internal_port = 3000
   force_https = true

@@ -30,7 +30,7 @@ export default async function MonitorPage({ params }: Props) {
 
         <div className="stat border">
           <div className="stat-title">Incidents</div>
-          <div className="stat-value">{monitor.incidents.length}</div>
+          <div className="stat-value">{monitor.incidents ? monitor.incidents.length : 0}</div>
         </div>
       </div>
     </>

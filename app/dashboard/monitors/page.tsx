@@ -41,5 +41,6 @@ async function getMonitors(): Promise<Monitor[]> {
     new Configuration({ accessToken: token?.value }),
     appConfig.apiUrl
   ).getAllMonitors();
+
   return response.data.data;
 }

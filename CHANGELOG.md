@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/flowck/dobermann-webapp/compare/v1.6.1...v1.6.2) (2023-12-10)
+
+
+### Bug Fixes
+
+* add a favicon and fix the header's main link ([#15](https://github.com/flowck/dobermann-webapp/issues/15)) ([f192fcb](https://github.com/flowck/dobermann-webapp/commit/f192fcbfb8840c1c10b387192273b220b8f23643))
+
 ## [1.6.1](https://github.com/flowck/dobermann-webapp/compare/v1.6.0...v1.6.1) (2023-12-10)
 
 

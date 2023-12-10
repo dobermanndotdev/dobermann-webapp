@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/flowck/dobermann-webapp/compare/v1.6.0...v1.6.1) (2023-12-10)
+
+
+### Bug Fixes
+
+* **#62:** fix issues found during worker deployment ([#11](https://github.com/flowck/dobermann-webapp/issues/11)) ([3a5c98d](https://github.com/flowck/dobermann-webapp/commit/3a5c98dca90f56f086f1612b585de754e7ec11c4))
+
 # [1.6.0](https://github.com/flowck/dobermann-webapp/compare/v1.5.0...v1.6.0) (2023-12-04)
 
 

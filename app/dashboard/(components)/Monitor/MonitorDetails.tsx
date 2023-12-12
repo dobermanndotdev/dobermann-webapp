@@ -3,6 +3,7 @@
 import { apiClients } from "@@/common/libs/api";
 import { Monitor } from "@@/common/libs/apiClient";
 import { Dates } from "@@/common/libs/dates";
+import { notify } from "@@/common/libs/errors";
 import { useCallback, useState } from "react";
 import { MonitorItemDetails } from "../MonitorItem";
 import { PauseToggler } from "./PauseToggler";
@@ -15,9 +16,13 @@ export function MonitorDetails({ monitor: initialData }: Props) {
   const [monitor, setMonitor] = useState(initialData);
 
   const refreshMonitor = useCallback(async () => {
-    const { data } = await apiClients.MonitorsApiFactory.getMonitorByID(monitor.id);
-    setMonitor(data.data);
-  }, [initialData.id]);
+    try {
+      const { data } = await apiClients.MonitorsApiFactory.getMonitorByID(monitor.id);
+      setMonitor(data.data);
+    } catch (error) {
+      notify("Unable to refresh monitor. Please reload the page", { type: "error" });
+    }
+  }, [monitor.id]);
 
   return (
     <>

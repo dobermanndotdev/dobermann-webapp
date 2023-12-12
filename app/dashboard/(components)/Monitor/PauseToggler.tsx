@@ -2,6 +2,7 @@
 
 import { Button } from "@@/common/components/Button";
 import { apiClients } from "@@/common/libs/api";
+import { notifyGenericError } from "@@/common/libs/errors";
 import { useState } from "react";
 
 interface Props {
@@ -22,7 +23,7 @@ export function PauseToggler({ isPaused: initialIsPaused, monitorId, onSuccess }
       await onSuccess();
       setPaused(!paused);
     } catch (error) {
-      console.error(error);
+      notifyGenericError();
     }
 
     setIsLoading(false);

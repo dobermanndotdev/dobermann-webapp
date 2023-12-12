@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/flowck/dobermann-webapp/compare/v1.7.0...v1.8.0) (2023-12-12)
+
+
+### Features
+
+* **#78:** button to toggle the pause state of the monitor ([#17](https://github.com/flowck/dobermann-webapp/issues/17)) ([51df29b](https://github.com/flowck/dobermann-webapp/commit/51df29b6aa317b7ff04881eb5c187f1a55e8c6e0)), closes [#78](https://github.com/flowck/dobermann-webapp/issues/78) [#72](https://github.com/flowck/dobermann-webapp/issues/72)
+
 # [1.7.0](https://github.com/flowck/dobermann-webapp/compare/v1.6.2...v1.7.0) (2023-12-12)
 
 

@@ -1,9 +1,9 @@
-import { ViewHeader } from "./(components)/ViewHeader";
+import { PageTitle } from "./(components)/PageTitle";
 
 export default function DashboardRootPage() {
   return (
     <>
-      <ViewHeader title="Dashboard">Welcome to Dobermann!</ViewHeader>
+      <PageTitle title="Dashboard">Welcome to Dobermann!</PageTitle>
     </>
   );
 }

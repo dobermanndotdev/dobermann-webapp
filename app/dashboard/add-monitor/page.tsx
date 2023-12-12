@@ -5,7 +5,7 @@ import { InputField } from "@@/common/components/InputField";
 import { Select, SelectOption } from "@@/common/components/Select";
 import { SubmitButton } from "@@/common/components/SubmitButton";
 import { useFormState } from "react-dom";
-import { ViewHeader } from "../(components)/ViewHeader";
+import { PageTitle } from "../(components)/PageTitle";
 import { addMonitorHandler } from "./form";
 
 export default function AddMonitorPage() {
@@ -13,7 +13,7 @@ export default function AddMonitorPage() {
 
   return (
     <>
-      <ViewHeader title="Add Monitor" />
+      <PageTitle title="Add Monitor" />
       <form action={action} className="flex flex-col gap-2">
         <InputField
           name="endpoint_url"

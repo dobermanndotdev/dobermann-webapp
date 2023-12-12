@@ -1,5 +1,6 @@
 "use client";
 
+import { LOCALSTORAGE_AUTH_TOKEN } from "@@/common/libs/contants";
 import { useRouter } from "next/navigation";
 import { Icon } from "./Icon";
 
@@ -8,6 +9,7 @@ export function AccountMenu() {
 
   const logoutHandler = async () => {
     await fetch("/logout", { method: "DELETE" });
+    localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN);
     router.push("/login");
   };
 

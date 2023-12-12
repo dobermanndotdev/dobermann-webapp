@@ -1,9 +1,9 @@
 "use server";
 
 import { appConfig } from "@@/app/config";
-import { mapFormErrors } from "@@/common/libs";
 import { AuthApiFactory } from "@@/common/libs/apiClient";
 import { COOKIE_AUTH_TOKEN } from "@@/common/libs/contants";
+import { mapFormErrors } from "@@/common/libs/errors";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";

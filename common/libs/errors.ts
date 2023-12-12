@@ -1,4 +1,5 @@
 import { AxiosError } from "axios";
+import { ToastOptions, toast } from "react-toastify";
 import { typeToFlattenedError } from "zod";
 
 export function mapFormErrors(formErrors: typeToFlattenedError<Record<string, string>, string>) {
@@ -23,3 +24,9 @@ export function handleApiErrors(error: unknown): string {
 
   return "";
 }
+
+export const notify = (content: string, options?: ToastOptions) => toast(content, options);
+export const notifyGenericError = () =>
+  notify("Unable to complete the desired action action. Please try again.", {
+    type: "error",
+  });

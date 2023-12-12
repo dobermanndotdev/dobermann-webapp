@@ -4,6 +4,7 @@ import { Configuration, Monitor, MonitorsApiFactory } from "@@/common/libs/apiCl
 import { COOKIE_AUTH_TOKEN, paths } from "@@/common/libs/contants";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { MonitorItem } from "../(components)/MonitorItem";
 import { ViewHeader } from "../(components)/ViewHeader";
 
 export default async function MonitorsPage() {
@@ -24,12 +25,7 @@ export default async function MonitorsPage() {
       {!hasMonitors && <Alert className="alert-base mt-4">You {"haven't"} created a monitor yet.</Alert>}
 
       {monitors.map((monitor) => (
-        <article key={monitor.id} className="border mb-4 px-4 py-4 flex flex-col text-sm">
-          <Link href={`/dashboard/monitors/${monitor.id}`}>{monitor.endpoint_url}</Link>
-          <div className={`badge ${monitor.is_endpoint_up ? "badge-success" : "badge-error"}  gap-2 mt-1`}>
-            {monitor.is_endpoint_up ? "Up" : "Down"}
-          </div>
-        </article>
+        <MonitorItem key={monitor.id} monitor={monitor} />
       ))}
     </>
   );

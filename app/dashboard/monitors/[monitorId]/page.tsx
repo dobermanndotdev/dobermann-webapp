@@ -3,6 +3,7 @@ import { Configuration, Monitor, MonitorsApiFactory } from "@@/common/libs/apiCl
 import { COOKIE_AUTH_TOKEN } from "@@/common/libs/contants";
 import { Dates } from "@@/common/libs/dates";
 import { cookies } from "next/headers";
+import { MonitorItemDetails } from "../../(components)/MonitorItem";
 import { ViewHeader } from "../../(components)/ViewHeader";
 
 interface Props {
@@ -15,9 +16,11 @@ export default async function MonitorPage({ params }: Props) {
   return (
     <>
       <ViewHeader title={monitor.endpoint_url}>
-        <div className={`badge ${monitor.is_endpoint_up ? "badge-success" : "badge-error"}  gap-2 mt-1`}>
-          {monitor.is_endpoint_up ? "Up" : "Down"}
-        </div>
+        <MonitorItemDetails
+          className="mt-1"
+          isUp={monitor.is_endpoint_up}
+          checkIntervalInSeconds={monitor.check_interval_in_seconds}
+        />
       </ViewHeader>
 
       <div className="grid grid-cols-2 gap-4">

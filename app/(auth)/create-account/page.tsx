@@ -2,7 +2,7 @@
 
 import { Alert } from "@@/common/components/Alert";
 import { Heading } from "@@/common/components/Heading";
-import { InputField } from "@@/common/components/Input";
+import { InputField } from "@@/common/components/InputField";
 import { SubmitButton } from "@@/common/components/SubmitButton";
 import Link from "next/link";
 import { useFormState } from "react-dom";

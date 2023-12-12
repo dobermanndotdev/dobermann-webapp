@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/flowck/dobermann-webapp/compare/v1.6.2...v1.7.0) (2023-12-12)
+
+
+### Features
+
+* **#84:** add check interval field ([#16](https://github.com/flowck/dobermann-webapp/issues/16)) ([ed62b55](https://github.com/flowck/dobermann-webapp/commit/ed62b55be8cb49e785038747613ebf97a7defbc2)), closes [#84](https://github.com/flowck/dobermann-webapp/issues/84) [#84](https://github.com/flowck/dobermann-webapp/issues/84)
+
 ## [1.6.2](https://github.com/flowck/dobermann-webapp/compare/v1.6.1...v1.6.2) (2023-12-10)
 
 

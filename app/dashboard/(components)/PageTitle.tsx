@@ -5,7 +5,7 @@ interface Props extends PropsWithChildren {
   CallToAction?: ReactNode;
 }
 
-export function ViewHeader({ children, title, CallToAction }: Props) {
+export function PageTitle({ children, title, CallToAction }: Props) {
   return (
     <section className="mb-6">
       <div className="flex justify-between items-center">

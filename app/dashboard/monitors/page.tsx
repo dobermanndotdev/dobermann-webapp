@@ -5,7 +5,7 @@ import { COOKIE_AUTH_TOKEN, paths } from "@@/common/libs/contants";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { MonitorItem } from "../(components)/MonitorItem";
-import { ViewHeader } from "../(components)/ViewHeader";
+import { PageTitle } from "../(components)/PageTitle";
 
 export default async function MonitorsPage() {
   const monitors = await getMonitors();
@@ -13,7 +13,7 @@ export default async function MonitorsPage() {
 
   return (
     <>
-      <ViewHeader
+      <PageTitle
         title="Monitors"
         CallToAction={
           <Link className="btn btn-sm btn-primary" href={paths.addMonitor}>

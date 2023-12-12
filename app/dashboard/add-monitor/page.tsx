@@ -15,10 +15,15 @@ export default function AddMonitorPage() {
     <>
       <ViewHeader title="Add Monitor" />
       <form action={action} className="flex flex-col gap-2">
-        <InputField error={state.fieldErrors.endpoint_url} name="endpoint_url" label="Endpoint URL" />
+        <InputField
+          name="endpoint_url"
+          label="Endpoint URL*"
+          placeholder="https://api.my.com/health"
+          error={state.fieldErrors.endpoint_url}
+        />
         <Select
           defaultValue="180"
-          label="Check interval"
+          label="Check interval*"
           name="check_interval_in_seconds"
           error={state.fieldErrors.check_interval_in_seconds}
         >

@@ -29,7 +29,10 @@ export async function addMonitorHandler(prevState: unknown, fields: FormData) {
     const token = cookies().get(COOKIE_AUTH_TOKEN);
     const client = MonitorsApiFactory(new Configuration({ accessToken: token?.value, basePath: appConfig.apiUrl }));
 
-    await client.createMonitor(result.data);
+    await client.createMonitor({
+      endpoint_url: result.data.endpoint_url,
+      check_interval_in_seconds: Number(result.data.check_interval_in_seconds),
+    });
   } catch (error) {
     return { fieldErrors: {}, message: handleApiErrors(error) };
   }

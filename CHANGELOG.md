@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/flowck/dobermann-webapp/compare/v1.8.0...v1.8.1) (2023-12-19)
+
+
+### Bug Fixes
+
+* disable auto_stop_machine to prevent app from sleeping ([#21](https://github.com/flowck/dobermann-webapp/issues/21)) ([04ed684](https://github.com/flowck/dobermann-webapp/commit/04ed6844074c66599a7e1ee24a603533f289a104))
+
 # [1.8.0](https://github.com/flowck/dobermann-webapp/compare/v1.7.0...v1.8.0) (2023-12-12)
 
 

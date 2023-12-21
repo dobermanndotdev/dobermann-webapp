@@ -17,13 +17,14 @@ export default function AddMonitorPage() {
     async (values: FormFields, { setSubmitting }: FormikHelpers<FormFields>) => {
       try {
         setSubmitting(true);
-        await apiClients.MonitorsApiFactory.createMonitor({
+        await apiClients().MonitorsApiFactory.createMonitor({
           ...values,
           check_interval_in_seconds: Number(values.check_interval_in_seconds),
         });
         notify("Monitor created", { type: "success" });
         router.push(paths.monitors);
       } catch (error) {
+        console.log(error);
         notify(handleApiErrors(error), { type: "error" });
         setSubmitting(false);
       }

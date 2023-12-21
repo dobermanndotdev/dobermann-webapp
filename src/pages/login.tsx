@@ -21,7 +21,7 @@ export default function LoginPage() {
     async (values: FormFields, { setSubmitting }: FormikHelpers<FormFields>) => {
       try {
         setSubmitting(true);
-        const { data } = await apiClients.AuthApiFactory.login(values);
+        const { data } = await apiClients().AuthApiFactory.login(values);
         await fetch("/api/auth/login", {
           method: "POST",
           body: JSON.stringify({ token: data.token }),

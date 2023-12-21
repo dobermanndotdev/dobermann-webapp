@@ -19,7 +19,7 @@ export function PauseToggler({ isPaused: initialIsPaused, monitorId, onSuccess }
     setIsLoading(true);
 
     try {
-      await apiClients.MonitorsApiFactory.toggleMonitorPause(monitorId, { pause: !paused });
+      await apiClients().MonitorsApiFactory.toggleMonitorPause(monitorId, { pause: !paused });
       await onSuccess();
       setPaused(!paused);
     } catch (error) {

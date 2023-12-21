@@ -17,7 +17,7 @@ export default function CreateAccountPage() {
     async (values: FormFields, { setSubmitting }: FormikHelpers<FormFields>) => {
       try {
         setSubmitting(true);
-        await apiClients.AuthApiFactory.createAccount(values);
+        await apiClients().AuthApiFactory.createAccount(values);
         router.push(`${paths.login}?account-created=1`);
       } catch (error) {
         notify(handleApiErrors(error), { type: "error" });

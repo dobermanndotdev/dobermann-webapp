@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/flowck/dobermann-webapp/compare/v1.8.1...v1.9.0) (2023-12-21)
+
+
+### Features
+
+* move to pages structure ([#22](https://github.com/flowck/dobermann-webapp/issues/22)) ([4986d70](https://github.com/flowck/dobermann-webapp/commit/4986d7036915e2211d9219e5cd113909ce4eb8f2))
+
 ## [1.8.1](https://github.com/flowck/dobermann-webapp/compare/v1.8.0...v1.8.1) (2023-12-19)
 
 

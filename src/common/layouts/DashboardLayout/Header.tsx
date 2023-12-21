@@ -1,4 +1,5 @@
 import { paths } from "@@/common/libs/contants";
+import { AccountMenu } from "@@/modules/Account/AccountMenu";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
 
@@ -11,7 +12,9 @@ export function Header() {
         </h1>
       </div>
       <div>
-        <MenuItem>{/* <AccountMenu /> */}</MenuItem>
+        <MenuItem>
+          <AccountMenu />
+        </MenuItem>
       </div>
     </header>
   );

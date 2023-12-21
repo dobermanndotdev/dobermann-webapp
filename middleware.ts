@@ -1,7 +1,7 @@
+import { COOKIE_AUTH_TOKEN } from "@@/common/libs/contants";
 import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { COOKIE_AUTH_TOKEN } from "./common/libs/contants";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {

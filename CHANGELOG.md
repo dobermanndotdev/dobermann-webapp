@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/flowck/dobermann-webapp/compare/v1.9.0...v1.9.1) (2023-12-21)
+
+
+### Bug Fixes
+
+* token retrieval on the client side ([#24](https://github.com/flowck/dobermann-webapp/issues/24)) ([2f938af](https://github.com/flowck/dobermann-webapp/commit/2f938af62378230b95e9a577a060fcec9b257acd))
+
 # [1.9.0](https://github.com/flowck/dobermann-webapp/compare/v1.8.1...v1.9.0) (2023-12-21)
 
 

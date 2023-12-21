@@ -22,7 +22,7 @@ export default function MonitorPage({ monitor: initialData }: Props) {
 
   const refreshMonitor = useCallback(async () => {
     try {
-      const { data } = await apiClients.MonitorsApiFactory.getMonitorByID(monitor.id);
+      const { data } = await apiClients().MonitorsApiFactory.getMonitorByID(monitor.id);
       setMonitor(data.data);
     } catch (error) {
       notify("Unable to refresh monitor. Please reload the page", { type: "error" });
@@ -32,7 +32,7 @@ export default function MonitorPage({ monitor: initialData }: Props) {
   const onDeleteMonitorHandler = useCallback(async () => {
     try {
       setIsDeleting(true);
-      await apiClients.MonitorsApiFactory.deleteMonitor(monitor.id);
+      await apiClients().MonitorsApiFactory.deleteMonitor(monitor.id);
       notify("Monitor removed successfully");
       router.push(paths.monitors);
     } catch (error) {

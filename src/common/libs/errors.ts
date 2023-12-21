@@ -17,6 +17,7 @@ export function mapFormErrors(formErrors: typeToFlattenedError<Record<string, st
 
 const apiErrors: Record<string, string> = {
   "email-in-use": "The email address provided is in use.",
+  unknown: "An error occurred, please try again.",
 };
 
 export function handleApiErrors(error: unknown): string {
@@ -24,10 +25,10 @@ export function handleApiErrors(error: unknown): string {
 
   if (err.response && err.response.data) {
     const key = (err.response.data as { error: string }).error;
-    return apiErrors[key];
+    return apiErrors[key] || apiErrors.unknown;
   }
 
-  return "An error occurred, please try again.";
+  return apiErrors.unknown;
 }
 
 export const notify = (content: string, options?: ToastOptions) => toast(content, options);

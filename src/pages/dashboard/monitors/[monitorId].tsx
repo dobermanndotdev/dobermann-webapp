@@ -42,7 +42,7 @@ export default function MonitorPage({ monitor: initialData }: Props) {
   }, [router, monitor.id]);
 
   return (
-    <DashboardLayout>
+    <DashboardLayout title={`Monitor ${monitor.endpoint_url}`}>
       <div className="flex justify-between mb-6">
         <div>
           <h1 className="font-bold text-lg">{monitor.endpoint_url}</h1>

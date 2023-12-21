@@ -16,7 +16,7 @@ export default function MonitorsPage({ monitors }: Props) {
   const hasMonitors = !!monitors.length;
 
   return (
-    <DashboardLayout>
+    <DashboardLayout title="Monitors">
       <PageTitle
         title="Monitors"
         CallToAction={
@@ -36,11 +36,11 @@ export default function MonitorsPage({ monitors }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const response = await ssrApiClients(req).MonitorsApiFactory.getAllMonitors();
+  const { data } = await ssrApiClients(req).MonitorsApiFactory.getAllMonitors();
 
   return {
     props: {
-      monitors: response.data.data,
+      monitors: data.data,
     },
   };
 };

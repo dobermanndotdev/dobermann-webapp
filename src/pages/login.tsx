@@ -44,7 +44,7 @@ export default function LoginPage() {
   });
 
   return (
-    <AuthLayout>
+    <AuthLayout title="Log in">
       <Heading>Log in to Dobbermann</Heading>
 
       {isAccountCreated && <Alert className="mt-4 alert-success">You account has been created successfully!</Alert>}

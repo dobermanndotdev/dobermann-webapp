@@ -38,7 +38,7 @@ export default function AddMonitorPage() {
   });
 
   return (
-    <DashboardLayout>
+    <DashboardLayout title="Add monitor">
       <PageTitle title="Add Monitor" />
       <form className="flex flex-col gap-2" onSubmit={f.handleSubmit}>
         <InputField

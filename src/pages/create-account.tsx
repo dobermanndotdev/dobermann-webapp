@@ -34,7 +34,7 @@ export default function CreateAccountPage() {
   });
 
   return (
-    <AuthLayout>
+    <AuthLayout title="Create an account">
       <Heading>Get started with Dobbermann</Heading>
       <form className="mt-4 flex flex-col gap-2" onSubmit={f.handleSubmit}>
         <InputField name="account_name" label="Account Name" onInput={f.handleChange} error={f.errors.account_name} />

@@ -15,7 +15,9 @@
     "submodule": "cd dobermann; git pull origin main"
   },
   "dependencies": {
+    "cookies": "^0.8.0",
     "dayjs": "^1.11.10",
+    "formik": "^2.4.5",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
@@ -25,6 +27,7 @@
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.7.0",
+    "@types/cookies": "^0.7.10",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

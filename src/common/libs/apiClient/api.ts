@@ -171,6 +171,32 @@ export interface GetAllMonitorsPayload {
 /**
  * 
  * @export
+ * @interface GetMonitorResponseTimeStatsPayload
+ */
+export interface GetMonitorResponseTimeStatsPayload {
+    /**
+     * 
+     * @type {Array<ResponseTimeStat>}
+     * @memberof GetMonitorResponseTimeStatsPayload
+     */
+    'data': Array<ResponseTimeStat>;
+}
+/**
+ * 
+ * @export
+ * @interface GetProfileDetailsPayload
+ */
+export interface GetProfileDetailsPayload {
+    /**
+     * 
+     * @type {User}
+     * @memberof GetProfileDetailsPayload
+     */
+    'data': User;
+}
+/**
+ * 
+ * @export
  * @interface Incident
  */
 export interface Incident {
@@ -277,6 +303,31 @@ export interface Monitor {
 /**
  * 
  * @export
+ * @interface ResponseTimeStat
+ */
+export interface ResponseTimeStat {
+    /**
+     * 
+     * @type {number}
+     * @memberof ResponseTimeStat
+     */
+    'value': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ResponseTimeStat
+     */
+    'date': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ResponseTimeStat
+     */
+    'region': string;
+}
+/**
+ * 
+ * @export
  * @interface ToggleMonitorPauseRequest
  */
 export interface ToggleMonitorPauseRequest {
@@ -287,6 +338,154 @@ export interface ToggleMonitorPauseRequest {
      */
     'pause': boolean;
 }
+/**
+ * 
+ * @export
+ * @interface User
+ */
+export interface User {
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'first_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'last_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'role': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'created_at': string;
+}
+
+/**
+ * AccountsApi - axios parameter creator
+ * @export
+ */
+export const AccountsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Get details about the user currently logged in
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProfileDetails: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/accounts/profile`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AccountsApi - functional programming interface
+ * @export
+ */
+export const AccountsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AccountsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Get details about the user currently logged in
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getProfileDetails(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetProfileDetailsPayload>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProfileDetails(options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AccountsApi.getProfileDetails']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AccountsApi - factory interface
+ * @export
+ */
+export const AccountsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AccountsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Get details about the user currently logged in
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProfileDetails(options?: any): AxiosPromise<GetProfileDetailsPayload> {
+            return localVarFp.getProfileDetails(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AccountsApi - object-oriented interface
+ * @export
+ * @class AccountsApi
+ * @extends {BaseAPI}
+ */
+export class AccountsApi extends BaseAPI {
+    /**
+     * 
+     * @summary Get details about the user currently logged in
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountsApi
+     */
+    public getProfileDetails(options?: AxiosRequestConfig) {
+        return AccountsApiFp(this.configuration).getProfileDetails(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
 
 /**
  * AuthApi - axios parameter creator
@@ -681,6 +880,49 @@ export const MonitorsApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary Get the stats about the response time
+         * @param {string} monitorID 
+         * @param {number} [rangeInDays] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMonitorResponseTimeStats: async (monitorID: string, rangeInDays?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'monitorID' is not null or undefined
+            assertParamExists('getMonitorResponseTimeStats', 'monitorID', monitorID)
+            const localVarPath = `/monitors/{monitorID}/stats/response-times`
+                .replace(`{${"monitorID"}}`, encodeURIComponent(String(monitorID)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (rangeInDays !== undefined) {
+                localVarQueryParameter['range_in_days'] = rangeInDays;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Pause or unpause the monitor
          * @param {string} monitorID 
          * @param {ToggleMonitorPauseRequest} toggleMonitorPauseRequest 
@@ -802,6 +1044,20 @@ export const MonitorsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Get the stats about the response time
+         * @param {string} monitorID 
+         * @param {number} [rangeInDays] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMonitorResponseTimeStats(monitorID: string, rangeInDays?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetMonitorResponseTimeStatsPayload>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMonitorResponseTimeStats(monitorID, rangeInDays, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MonitorsApi.getMonitorResponseTimeStats']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Pause or unpause the monitor
          * @param {string} monitorID 
          * @param {ToggleMonitorPauseRequest} toggleMonitorPauseRequest 
@@ -875,6 +1131,17 @@ export const MonitorsApiFactory = function (configuration?: Configuration, baseP
          */
         getMonitorByID(monitorID: string, options?: any): AxiosPromise<GetAllMonitorByIdPayload> {
             return localVarFp.getMonitorByID(monitorID, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the stats about the response time
+         * @param {string} monitorID 
+         * @param {number} [rangeInDays] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMonitorResponseTimeStats(monitorID: string, rangeInDays?: number, options?: any): AxiosPromise<GetMonitorResponseTimeStatsPayload> {
+            return localVarFp.getMonitorResponseTimeStats(monitorID, rangeInDays, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -957,6 +1224,19 @@ export class MonitorsApi extends BaseAPI {
      */
     public getMonitorByID(monitorID: string, options?: AxiosRequestConfig) {
         return MonitorsApiFp(this.configuration).getMonitorByID(monitorID, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the stats about the response time
+     * @param {string} monitorID 
+     * @param {number} [rangeInDays] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MonitorsApi
+     */
+    public getMonitorResponseTimeStats(monitorID: string, rangeInDays?: number, options?: AxiosRequestConfig) {
+        return MonitorsApiFp(this.configuration).getMonitorResponseTimeStats(monitorID, rangeInDays, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

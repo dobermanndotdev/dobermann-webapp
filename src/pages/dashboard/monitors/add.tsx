@@ -21,7 +21,6 @@ export default function AddMonitorPage() {
           ...values,
           check_interval_in_seconds: Number(values.check_interval_in_seconds),
         });
-        notify("Monitor created", { type: "success" });
         router.push(paths.monitors);
       } catch (error) {
         console.log(error);

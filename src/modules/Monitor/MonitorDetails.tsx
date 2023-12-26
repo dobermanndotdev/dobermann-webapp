@@ -46,6 +46,7 @@ export function MonitorDetails({ monitor: initialData }: Props) {
           <h1 className="font-bold text-lg">{monitor.endpoint_url}</h1>
           <MonitorItemDetails
             className="mt-1"
+            isLoading={false}
             isPaused={monitor.is_paused}
             isUp={monitor.is_endpoint_up}
             checkIntervalInSeconds={monitor.check_interval_in_seconds}

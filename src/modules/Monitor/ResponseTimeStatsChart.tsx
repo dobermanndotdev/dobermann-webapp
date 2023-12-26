@@ -1,101 +1,121 @@
+import { Button } from "@@/common/components/Button";
 import { Serie, SerieDataPoint, TimeseriesChart } from "@@/common/components/TimeseriesChart";
+import { apiClients } from "@@/common/libs/api";
 import { ResponseTimeStat } from "@@/common/libs/apiClient";
 import { Dates } from "@@/common/libs/dates";
-import { faker } from "@faker-js/faker";
-import { Dayjs } from "dayjs";
 import { useMemo, useState } from "react";
 
 interface Props {
+  monitorId: string;
   className?: string;
   responseTimeStats: ResponseTimeStat[];
 }
 
-export function ResponseTimeStatsChart({ responseTimeStats, className }: Props) {
-  const [viewType, setViewType] = useState("monthly");
-  const series: Serie[] = useMemo(() => {
-    const mapper: Record<string, Serie> = {};
+enum VIEW_TYPES {
+  DAILY = "daily",
+  WEEKLY = "weekly",
+  MONTHLY = "monthly",
+}
 
-    responseTimeStats.forEach((stat) => {
-      const item: SerieDataPoint = {
-        timestamp: Dates.new(stat.date).toDate().getTime(),
-        value: stat.value,
-      };
-      if (mapper[stat.region]) {
-        mapper[stat.region].data.push(item);
-      } else {
-        mapper[stat.region] = {
-          name: stat.region,
-          data: [item],
-        };
-      }
-    });
+type ViewType = VIEW_TYPES.DAILY | VIEW_TYPES.WEEKLY | VIEW_TYPES.MONTHLY;
 
-    return Object.values(mapper);
-  }, [responseTimeStats]);
+interface ViewTypeConfig {
+  id: ViewType;
+  label: string;
+}
+
+export function ResponseTimeStatsChart({ responseTimeStats: initialData, className, monitorId }: Props) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [viewType, setViewType] = useState(VIEW_TYPES.WEEKLY);
+  const [responseTimeStats, setResponseTimeStats] = useState(initialData);
+  const series: Serie[] = useMemo(() => mapResponseTimesToSeries(responseTimeStats), [responseTimeStats]);
+
+  const handleViewTypeChange = async (viewTypeChangedTo: ViewType) => {
+    setIsLoading(true);
+    setViewType(viewTypeChangedTo);
+
+    const rangeInDays = mapViewTypeToRangeInDays(viewTypeChangedTo);
+    const { data } = await apiClients().MonitorsApiFactory.getMonitorResponseTimeStats(monitorId, rangeInDays);
+    setResponseTimeStats(data.data);
+    setIsLoading(false);
+  };
 
   return (
     <div className={`border p-3 ${className}`}>
       <header className="flex justify-between mb-2">
         <div>Response times</div>
-        <div className="flex gap-2 border">
+        <div className="flex gap-1 border p-[2px]">
           {viewTypes.map((vt) => (
-            <button
+            <Button
               key={vt.id}
-              onClick={() => setViewType(vt.id)}
+              disabled={isLoading}
+              isLoading={vt.id === viewType && isLoading}
+              onClick={() => handleViewTypeChange(vt.id)}
               className={`btn btn-xs ${viewType === vt.id ? "btn-active" : "btn-ghost"}`}
             >
               {vt.label}
-            </button>
+            </Button>
           ))}
         </div>
       </header>
-      <TimeseriesChart series={series} />
+      <TimeseriesChart
+        series={series}
+        tickFormatter={(val, index) => {
+          switch (viewType) {
+            case VIEW_TYPES.DAILY:
+              return Dates.format(val, "hh:mma");
+            default:
+              return Dates.format(val, "MM/DD hh:mma");
+          }
+        }}
+      />
     </div>
   );
 }
 
-function generateDataPoint(date: Dayjs) {
-  return {
-    timestamp: date.toDate().getTime(),
-    value: faker.number.int({ min: 150, max: 250 }),
-  };
-}
+function mapResponseTimesToSeries(responseTimeStats: ResponseTimeStat[]) {
+  const mapper: Record<string, Serie> = {};
 
-function generateSeriesDataPoints(numOfDays: number, pointsPerDay: number): SerieDataPoint[] {
-  let startDate = Dates.new().subtract(1, "month");
-  const result: SerieDataPoint[] = [];
-
-  for (let i = 0; i < numOfDays; i++) {
-    startDate = startDate.add(1, "day");
-    for (let j = 0; j < pointsPerDay; j++) {
-      startDate = startDate.add(1, "hour");
-      const val = generateDataPoint(startDate);
-      console.log(startDate.toDate(), "-", val.timestamp);
-      result.push(val);
+  responseTimeStats.forEach((stat) => {
+    const item: SerieDataPoint = {
+      timestamp: Dates.new(stat.date).toDate().getTime(),
+      value: stat.value,
+    };
+    if (mapper[stat.region]) {
+      mapper[stat.region].data.push(item);
+    } else {
+      mapper[stat.region] = {
+        name: stat.region,
+        data: [item],
+      };
     }
-  }
+  });
 
-  return result;
+  return Object.values(mapper);
 }
 
-const _series: Serie[] = [
+const viewTypes: ViewTypeConfig[] = [
   {
-    name: "Europe",
-    data: [...generateSeriesDataPoints(1, 8)],
-  },
-];
-
-const viewTypes = [
-  {
-    id: "daily",
+    id: VIEW_TYPES.DAILY,
     label: "Daily",
   },
   {
-    id: "weekly",
+    id: VIEW_TYPES.WEEKLY,
     label: "Weekly",
   },
   {
-    id: "monthly",
+    id: VIEW_TYPES.MONTHLY,
     label: "Monthly",
   },
 ];
+
+function mapViewTypeToRangeInDays(viewType: ViewType): number {
+  switch (viewType) {
+    case VIEW_TYPES.DAILY:
+      return 1;
+    case VIEW_TYPES.WEEKLY:
+      return 7;
+    default:
+      return 30;
+  }
+}

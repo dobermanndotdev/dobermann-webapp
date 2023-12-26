@@ -1,3 +1,4 @@
+import { Loading } from "@@/common/components/Loading";
 import { Monitor } from "@@/common/libs/apiClient";
 import Link from "next/link";
 import { ComponentPropsWithoutRef } from "react";
@@ -13,6 +14,7 @@ export function MonitorItem({ monitor }: Props) {
         <h1 className="font-bold text-base">{monitor.endpoint_url}</h1>
         <MonitorItemDetails
           className="mt-1"
+          isLoading={false}
           isPaused={monitor.is_paused}
           isUp={monitor.is_endpoint_up}
           checkIntervalInSeconds={monitor.check_interval_in_seconds}
@@ -25,14 +27,16 @@ export function MonitorItem({ monitor }: Props) {
 interface MonitorItemDetailsProps extends ComponentPropsWithoutRef<"div"> {
   isUp: boolean;
   isPaused: boolean;
+  isLoading: boolean;
   checkIntervalInSeconds: number;
 }
 
 export function MonitorItemDetails({
   isUp,
-  checkIntervalInSeconds,
   isPaused,
   className,
+  isLoading,
+  checkIntervalInSeconds,
   ...props
 }: MonitorItemDetailsProps) {
   return (
@@ -42,6 +46,11 @@ export function MonitorItemDetails({
       )}
       {isPaused && <div className="badge badge-warning gap-2">Paused</div>}
       <div className="badge badge-ghost">Checked every {formatCheckIntervalToMinutes(checkIntervalInSeconds)}</div>
+      {isLoading && (
+        <div className="badge badge-warning">
+          <Loading size="xs" />
+        </div>
+      )}
     </div>
   );
 }

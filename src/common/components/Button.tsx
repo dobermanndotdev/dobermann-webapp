@@ -7,8 +7,8 @@ interface Props extends ComponentPropsWithoutRef<"button"> {
 export function Button({ className, children, isLoading, ...props }: Props) {
   return (
     <button className={`btn ${className}`} {...props}>
-      {isLoading && <span className="loading loading-spinner loading-xs"></span>}
-      <span>{children}</span>
+      {isLoading && <span className="loading loading-spinner loading-xs absolute"></span>}
+      <span className={`${isLoading ? "opacity-0" : ""}`}>{children}</span>
     </button>
   );
 }

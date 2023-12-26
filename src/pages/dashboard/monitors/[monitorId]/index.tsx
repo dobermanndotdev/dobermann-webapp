@@ -1,4 +1,5 @@
 import { Button } from "@@/common/components/Button";
+import { ButtonLink } from "@@/common/components/ButtonLink";
 import { DashboardLayout } from "@@/common/layouts/DashboardLayout/DashboardLayout";
 import { apiClients, ssrApiClients } from "@@/common/libs/api";
 import { Monitor, ResponseTimeStat } from "@@/common/libs/apiClient";
@@ -36,7 +37,6 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
     try {
       setIsDeleting(true);
       await apiClients().MonitorsApiFactory.deleteMonitor(monitor.id);
-      notify("Monitor removed successfully");
       router.push(paths.monitors);
     } catch (error) {
       notifyGenericError();
@@ -64,10 +64,13 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
             disabled={isDeleting}
             isLoading={isDeleting}
             onClick={onDeleteMonitorHandler}
-            className="btn-sm btn-warning"
+            className="btn-sm btn-outline"
           >
             Delete
           </Button>
+          <ButtonLink href={paths.toEditMonitor(monitor.id)} className="btn-sm btn-outline">
+            Edit
+          </ButtonLink>
         </div>
       </div>
 

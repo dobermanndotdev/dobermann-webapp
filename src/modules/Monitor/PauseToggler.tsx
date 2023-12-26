@@ -30,7 +30,7 @@ export function PauseToggler({ isPaused: initialIsPaused, monitorId, onSuccess }
   };
 
   return (
-    <Button isLoading={isLoading} disabled={isLoading} onClick={handler} className="btn-sm btn-secondary">
+    <Button isLoading={isLoading} disabled={isLoading} onClick={handler} className="btn-sm btn-outline">
       {paused ? "Unpause" : "Pause"}
     </Button>
   );

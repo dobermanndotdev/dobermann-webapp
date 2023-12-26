@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/flowck/dobermann-webapp/compare/v1.14.0...v1.15.0) (2023-12-26)
+
+
+### Features
+
+* **#9:** add breadcrumbs ([#33](https://github.com/flowck/dobermann-webapp/issues/33)) ([540c1e9](https://github.com/flowck/dobermann-webapp/commit/540c1e93931a6e1fdeb78545abe78da110709db3)), closes [#9](https://github.com/flowck/dobermann-webapp/issues/9)
+
 # [1.14.0](https://github.com/flowck/dobermann-webapp/compare/v1.13.0...v1.14.0) (2023-12-26)
 
 

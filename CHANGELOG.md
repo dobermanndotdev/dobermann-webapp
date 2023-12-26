@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/flowck/dobermann-webapp/compare/v1.9.1...v1.10.0) (2023-12-26)
+
+
+### Features
+
+* continuous updates of  the last checked at  ([#26](https://github.com/flowck/dobermann-webapp/issues/26)) ([a7aae05](https://github.com/flowck/dobermann-webapp/commit/a7aae05f650fffa58b08a9af6167309ef9260085))
+
 ## [1.9.1](https://github.com/flowck/dobermann-webapp/compare/v1.9.0...v1.9.1) (2023-12-21)
 
 

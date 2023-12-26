@@ -12,4 +12,5 @@ export const paths = {
 
   // helpers
   toEditMonitor: (id: string) => `/dashboard/monitors/${id}/edit`,
+  toIncident: (id: string) => `/dashboard/incidents/${id}`,
 };

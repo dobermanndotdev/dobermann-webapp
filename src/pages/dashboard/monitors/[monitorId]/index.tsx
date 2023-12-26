@@ -91,6 +91,11 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
       {!!responseTimeStats.length && (
         <ResponseTimeStatsChart monitorId={monitor.id} responseTimeStats={responseTimeStats} className="mt-4" />
       )}
+
+      {/* <section className="mt-6">
+        <PageSubTitle>Incidents</PageSubTitle>
+        <IncidentList incidents={monitor.incidents} />
+      </section> */}
     </DashboardLayout>
   );
 }

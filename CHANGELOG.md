@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/flowck/dobermann-webapp/compare/v1.12.0...v1.13.0) (2023-12-26)
+
+
+### Features
+
+* **#18:** build a small landing page ([#30](https://github.com/flowck/dobermann-webapp/issues/30)) ([fc75cbd](https://github.com/flowck/dobermann-webapp/commit/fc75cbda35155ad89f1d1a7aad2b30bec580bdc0)), closes [#18](https://github.com/flowck/dobermann-webapp/issues/18)
+
 # [1.12.0](https://github.com/flowck/dobermann-webapp/compare/v1.11.0...v1.12.0) (2023-12-26)
 
 

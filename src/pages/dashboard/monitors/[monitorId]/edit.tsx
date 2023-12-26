@@ -4,10 +4,9 @@ import { PageTitle } from "@@/common/components/PageTitle";
 import { Select, SelectOption } from "@@/common/components/Select";
 import { DashboardLayout } from "@@/common/layouts/DashboardLayout/DashboardLayout";
 import { apiClients, ssrApiClients } from "@@/common/libs/api";
-import { Monitor, ResponseTimeStat } from "@@/common/libs/apiClient";
+import { Monitor } from "@@/common/libs/apiClient";
 import { paths } from "@@/common/libs/contants";
 import { handleApiErrors, notify } from "@@/common/libs/errors";
-import { useLiveMonitor } from "@@/modules/Monitor/hooks";
 import { FormikHelpers, useFormik } from "formik";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
@@ -15,12 +14,10 @@ import { useCallback } from "react";
 
 interface Props {
   monitor: Monitor;
-  responseTimeStats: ResponseTimeStat[];
 }
 
-export default function EditMonitorPage({ monitor: initialData, responseTimeStats }: Props) {
+export default function EditMonitorPage({ monitor }: Props) {
   const router = useRouter();
-  const { monitor, isLoading, setMonitor } = useLiveMonitor(initialData);
 
   const handler = useCallback(
     async (values: FormFields, { setSubmitting }: FormikHelpers<FormFields>) => {
@@ -90,12 +87,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ req, param
 
   try {
     const { data } = await client.MonitorsApiFactory.getMonitorByID(monitorId);
-    // const { data: responseTimeStats } = await client.MonitorsApiFactory.getMonitorResponseTimeStats(monitorId, 7);
 
     return {
       props: {
         monitor: data.data,
-        responseTimeStats: [], //responseTimeStats.data,
       },
     };
   } catch (error) {

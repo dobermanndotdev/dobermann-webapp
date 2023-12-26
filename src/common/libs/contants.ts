@@ -9,4 +9,7 @@ export const paths = {
   // auth
   login: "/login",
   createAccount: "/create-account",
+
+  // helpers
+  toEditMonitor: (id: string) => `/dashboard/monitors/${id}/edit`,
 };

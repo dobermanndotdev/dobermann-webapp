@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/flowck/dobermann-webapp/compare/v1.13.0...v1.14.0) (2023-12-26)
+
+
+### Features
+
+* **#13:** show profile details ([#31](https://github.com/flowck/dobermann-webapp/issues/31)) ([c2f3d2d](https://github.com/flowck/dobermann-webapp/commit/c2f3d2d7335f45eca3be1a755c861fc29fbe2ca3)), closes [#13](https://github.com/flowck/dobermann-webapp/issues/13)
+
 # [1.13.0](https://github.com/flowck/dobermann-webapp/compare/v1.12.0...v1.13.0) (2023-12-26)
 
 

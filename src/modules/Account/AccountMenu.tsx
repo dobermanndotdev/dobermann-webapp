@@ -6,7 +6,7 @@ export function AccountMenu() {
   const router = useRouter();
 
   const logoutHandler = async () => {
-    await fetch("/logout", { method: "DELETE" });
+    await fetch("/api/auth/logout", { method: "DELETE" });
     localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN);
     router.push("/login");
   };

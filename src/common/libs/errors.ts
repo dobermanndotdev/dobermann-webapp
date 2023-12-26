@@ -17,6 +17,9 @@ export function mapFormErrors(formErrors: typeToFlattenedError<Record<string, st
 
 const apiErrors: Record<string, string> = {
   "email-in-use": "The email address provided is in use.",
+  "validation-error": "Please verify if all fields have been filled correctly.",
+  "unable-to-create-account":
+    "Due to an unexpected error we were unable to create an account now, please try again later.",
   unknown: "An error occurred, please try again.",
 };
 

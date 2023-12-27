@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/flowck/dobermann-webapp/compare/v1.15.1...v1.16.0) (2023-12-27)
+
+
+### Features
+
+* **#35:** enable the response time chart ([#36](https://github.com/flowck/dobermann-webapp/issues/36)) ([f4a7efc](https://github.com/flowck/dobermann-webapp/commit/f4a7efc48fe4ea1e2823f9bc114120e339745367)), closes [#35](https://github.com/flowck/dobermann-webapp/issues/35)
+
 ## [1.15.1](https://github.com/flowck/dobermann-webapp/compare/v1.15.0...v1.15.1) (2023-12-27)
 
 

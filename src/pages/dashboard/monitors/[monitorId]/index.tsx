@@ -46,11 +46,10 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
 
   return (
     <DashboardLayout
-      breadcrumbParam="[monitorId]"
-      breadcrumbTitle={monitor.id}
+      breadcrumbReplacer={{ key: "[monitorId]", pathname: monitor.id, label: monitor.endpoint_url }}
       title={`Monitor ${monitor.endpoint_url}`}
     >
-      <div className="flex justify-between mb-6">
+      <div className="flex justify-between mb-8">
         <div>
           <h1 className="font-bold text-lg">{monitor.endpoint_url}</h1>
           <MonitorItemDetails

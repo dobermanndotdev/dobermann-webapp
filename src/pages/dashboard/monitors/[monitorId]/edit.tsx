@@ -47,7 +47,10 @@ export default function EditMonitorPage({ monitor }: Props) {
   });
 
   return (
-    <DashboardLayout title={`Edit monitor ${monitor.endpoint_url}`}>
+    <DashboardLayout
+      title={`Edit monitor ${monitor.endpoint_url}`}
+      breadcrumbReplacer={{ key: "[monitorId]", pathname: monitor.id, label: monitor.endpoint_url }}
+    >
       <PageTitle title={`Edit monitor ${monitor.endpoint_url}`} />
       <form className="flex flex-col gap-2" onSubmit={f.handleSubmit}>
         <InputField

@@ -2,13 +2,18 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 
+export interface Replacer {
+  key: string;
+  pathname: string;
+  label: string;
+}
+
 interface Props {
-  replacer?: string;
-  replaceWith?: string;
+  replacer?: Replacer;
   className?: string;
 }
 
-export function Breadcrumbs({ className, replacer = "", replaceWith = "" }: Props) {
+export function Breadcrumbs({ className, replacer }: Props) {
   const router = useRouter();
   const paths = useMemo(() => {
     const parts = router.pathname.split("/").filter((item) => item);
@@ -17,14 +22,17 @@ export function Breadcrumbs({ className, replacer = "", replaceWith = "" }: Prop
     parts.forEach((value, index) => {
       if (index === 0) {
         values.push({ path: `/${value}`, label: value });
+      } else if (replacer) {
+        const label = value.replace(replacer.key, replacer.label || replacer.pathname);
+        const pathname = value.replace(replacer.key, replacer.pathname);
+        values.push({ path: `${values[index - 1].path}/${pathname}`, label });
       } else {
-        const valueReplaced = value.replace(replacer, replaceWith);
-        values.push({ path: `${values[index - 1].path}/${valueReplaced}`, label: valueReplaced });
+        values.push({ path: `${values[index - 1].path}/${value}`, label: value });
       }
     });
 
     return values;
-  }, [router.pathname, replaceWith, replacer]);
+  }, [router.pathname, replacer]);
 
   return (
     <div className={`text-sm breadcrumbs ${className}`}>

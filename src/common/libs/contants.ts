@@ -1,6 +1,7 @@
 export const COOKIE_AUTH_TOKEN = "DOBERMANN_AUTH_TOKEN";
 export const LOCALSTORAGE_AUTH_TOKEN = "DOBERMANN_AUTH_TOKEN";
 export const SESSION_STORAGE_USER_DETAILS = "DOBERMANN_USER_DETAILS";
+export const FULL_DATE_FORMAT = "ddd, MMM D, YYYY h:mm:ss A";
 
 export const paths = {
   monitors: "/dashboard/monitors",

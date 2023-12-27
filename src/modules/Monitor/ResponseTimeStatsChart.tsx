@@ -8,6 +8,7 @@ import { useMemo, useState } from "react";
 interface Props {
   monitorId: string;
   className?: string;
+  defaultViewType?: ViewType;
   responseTimeStats: ResponseTimeStat[];
 }
 
@@ -24,9 +25,14 @@ interface ViewTypeConfig {
   label: string;
 }
 
-export function ResponseTimeStatsChart({ responseTimeStats: initialData, className, monitorId }: Props) {
+export function ResponseTimeStatsChart({
+  responseTimeStats: initialData,
+  className,
+  monitorId,
+  defaultViewType = VIEW_TYPES.DAILY,
+}: Props) {
   const [isLoading, setIsLoading] = useState(false);
-  const [viewType, setViewType] = useState(VIEW_TYPES.WEEKLY);
+  const [viewType, setViewType] = useState(defaultViewType);
   const [responseTimeStats, setResponseTimeStats] = useState(initialData);
   const series: Serie[] = useMemo(() => mapResponseTimesToSeries(responseTimeStats), [responseTimeStats]);
 
@@ -41,9 +47,9 @@ export function ResponseTimeStatsChart({ responseTimeStats: initialData, classNa
   };
 
   return (
-    <div className={`border p-3 ${className}`}>
+    <div className={className}>
       <header className="flex justify-between mb-2">
-        <div>Response times</div>
+        <div></div>
         <div className="flex gap-1 border p-[2px]">
           {viewTypes.map((vt) => (
             <Button

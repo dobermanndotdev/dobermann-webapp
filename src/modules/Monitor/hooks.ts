@@ -2,7 +2,7 @@ import { apiClients } from "@@/common/libs/api";
 import { Monitor } from "@@/common/libs/apiClient";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-export function useLiveMonitor(initialData: Monitor, interval = 5 * 1000) {
+export function useLiveMonitor(initialData: Monitor, interval = 15 * 1000) {
   const [monitor, setMonitor] = useState(initialData);
   const [isLoading, setIsLoading] = useState(false);
   const monitorId = useMemo(() => initialData.id, [initialData.id]);

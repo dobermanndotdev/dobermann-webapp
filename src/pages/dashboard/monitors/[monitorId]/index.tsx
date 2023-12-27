@@ -1,5 +1,6 @@
 import { Button } from "@@/common/components/Button";
 import { ButtonLink } from "@@/common/components/ButtonLink";
+import { Card } from "@@/common/components/Card";
 import { DashboardLayout } from "@@/common/layouts/DashboardLayout/DashboardLayout";
 import { apiClients, ssrApiClients } from "@@/common/libs/api";
 import { Monitor, ResponseTimeStat } from "@@/common/libs/apiClient";
@@ -21,8 +22,8 @@ interface Props {
 
 export default function MonitorPage({ monitor: initialData, responseTimeStats }: Props) {
   const router = useRouter();
-  const { monitor, isLoading, setMonitor } = useLiveMonitor(initialData);
   const [isDeleting, setIsDeleting] = useState(false);
+  const { monitor, isLoading, setMonitor } = useLiveMonitor(initialData);
 
   const refreshMonitor = useCallback(async () => {
     try {
@@ -92,7 +93,9 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
       </div>
 
       {!!responseTimeStats.length && (
-        <ResponseTimeStatsChart monitorId={monitor.id} responseTimeStats={responseTimeStats} className="mt-4" />
+        <Card title="Response times" className="mt-4">
+          <ResponseTimeStatsChart monitorId={monitor.id} responseTimeStats={responseTimeStats} className="mt-4" />
+        </Card>
       )}
 
       {/* <section className="mt-6">
@@ -109,12 +112,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ req, param
 
   try {
     const { data } = await client.MonitorsApiFactory.getMonitorByID(monitorId);
-    // const { data: responseTimeStats } = await client.MonitorsApiFactory.getMonitorResponseTimeStats(monitorId, 7);
+    const { data: responseTimeStats } = await client.MonitorsApiFactory.getMonitorResponseTimeStats(monitorId, 1);
 
     return {
       props: {
         monitor: data.data,
-        responseTimeStats: [], //responseTimeStats.data,
+        responseTimeStats: responseTimeStats.data,
       },
     };
   } catch (error) {

@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/flowck/dobermann-webapp/compare/v1.15.0...v1.15.1) (2023-12-27)
+
+
+### Bug Fixes
+
+* breadcrumbs ([#34](https://github.com/flowck/dobermann-webapp/issues/34)) ([7c44867](https://github.com/flowck/dobermann-webapp/commit/7c44867b84df80f61539b49e59b0ac667febc45e))
+
 # [1.15.0](https://github.com/flowck/dobermann-webapp/compare/v1.14.0...v1.15.0) (2023-12-26)
 
 

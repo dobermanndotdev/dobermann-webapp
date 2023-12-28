@@ -108,6 +108,61 @@ export interface ErrorResponse {
 /**
  * 
  * @export
+ * @interface FullIncident
+ */
+export interface FullIncident {
+    /**
+     * 
+     * @type {string}
+     * @memberof FullIncident
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FullIncident
+     */
+    'checked_url': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FullIncident
+     */
+    'cause': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FullIncident
+     */
+    'resolved_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FullIncident
+     */
+    'created_at': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FullIncident
+     */
+    'response_headers': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FullIncident
+     */
+    'request_headers': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FullIncident
+     */
+    'response_status': number;
+}
+/**
+ * 
+ * @export
  * @interface GenericResponse
  */
 export interface GenericResponse {
@@ -171,6 +226,19 @@ export interface GetAllMonitorsPayload {
 /**
  * 
  * @export
+ * @interface GetIncidentByByIdPayload
+ */
+export interface GetIncidentByByIdPayload {
+    /**
+     * 
+     * @type {FullIncident}
+     * @memberof GetIncidentByByIdPayload
+     */
+    'data': FullIncident;
+}
+/**
+ * 
+ * @export
  * @interface GetMonitorResponseTimeStatsPayload
  */
 export interface GetMonitorResponseTimeStatsPayload {
@@ -206,6 +274,24 @@ export interface Incident {
      * @memberof Incident
      */
     'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Incident
+     */
+    'checked_url': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Incident
+     */
+    'cause': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Incident
+     */
+    'resolved_at'?: string;
     /**
      * 
      * @type {string}
@@ -663,6 +749,118 @@ export class AuthApi extends BaseAPI {
      */
     public login(logInRequest: LogInRequest, options?: AxiosRequestConfig) {
         return AuthApiFp(this.configuration).login(logInRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * IncidentsApi - axios parameter creator
+ * @export
+ */
+export const IncidentsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Get an incident by id
+         * @param {string} incidentID 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIncidentByID: async (incidentID: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'incidentID' is not null or undefined
+            assertParamExists('getIncidentByID', 'incidentID', incidentID)
+            const localVarPath = `/incidents/{incidentID}`
+                .replace(`{${"incidentID"}}`, encodeURIComponent(String(incidentID)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * IncidentsApi - functional programming interface
+ * @export
+ */
+export const IncidentsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = IncidentsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Get an incident by id
+         * @param {string} incidentID 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getIncidentByID(incidentID: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetIncidentByByIdPayload>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getIncidentByID(incidentID, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['IncidentsApi.getIncidentByID']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * IncidentsApi - factory interface
+ * @export
+ */
+export const IncidentsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = IncidentsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Get an incident by id
+         * @param {string} incidentID 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIncidentByID(incidentID: string, options?: any): AxiosPromise<GetIncidentByByIdPayload> {
+            return localVarFp.getIncidentByID(incidentID, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * IncidentsApi - object-oriented interface
+ * @export
+ * @class IncidentsApi
+ * @extends {BaseAPI}
+ */
+export class IncidentsApi extends BaseAPI {
+    /**
+     * 
+     * @summary Get an incident by id
+     * @param {string} incidentID 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IncidentsApi
+     */
+    public getIncidentByID(incidentID: string, options?: AxiosRequestConfig) {
+        return IncidentsApiFp(this.configuration).getIncidentByID(incidentID, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

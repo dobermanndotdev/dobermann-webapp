@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import Duration from "dayjs/plugin/duration";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import RelativeTime from "dayjs/plugin/relativeTime";
 import UpdateLocale from "dayjs/plugin/updateLocale";
@@ -6,6 +7,7 @@ import UpdateLocale from "dayjs/plugin/updateLocale";
 dayjs.extend(UpdateLocale);
 dayjs.extend(RelativeTime);
 dayjs.extend(LocalizedFormat);
+dayjs.extend(Duration);
 
 dayjs.updateLocale("en", {
   relativeTime: {
@@ -26,7 +28,8 @@ dayjs.updateLocale("en", {
 });
 
 export const Dates = {
-  new: (date?: string) => dayjs(date),
+  new: (date?: string | number) => dayjs(date),
   fromNow: (date: string | Date) => dayjs(date).fromNow(),
   format: (date: string | Date, format: string) => dayjs(date).format(format),
+  duration: (timestamp: number) => dayjs.duration(timestamp),
 };

@@ -1,6 +1,11 @@
 import { appConfig } from "../config";
-import { AuthApiFactory, Configuration, MonitorsApiFactory } from "./apiClient";
-import { AccountsApiFactory } from "./apiClient/api";
+import {
+  AccountsApiFactory,
+  AuthApiFactory,
+  Configuration,
+  IncidentsApiFactory,
+  MonitorsApiFactory,
+} from "./apiClient";
 import { COOKIE_AUTH_TOKEN, LOCALSTORAGE_AUTH_TOKEN } from "./contants";
 
 export const apiClients = () => {
@@ -11,6 +16,7 @@ export const apiClients = () => {
   return {
     AccountsApiFactory: AccountsApiFactory(baseAuthConfig),
     MonitorsApiFactory: MonitorsApiFactory(baseAuthConfig),
+    IncidentsApiFactory: IncidentsApiFactory(baseAuthConfig),
     // IAM
     AuthApiFactory: AuthApiFactory(new Configuration({ basePath: appConfig.apiUrl })),
   };
@@ -23,6 +29,8 @@ export const ssrApiClients = (req: any) => {
   return {
     MonitorsApiFactory: MonitorsApiFactory(baseAuthConfig),
     AccountsApiFactory: AccountsApiFactory(baseAuthConfig),
+    IncidentsApiFactory: IncidentsApiFactory(baseAuthConfig),
+
     // IAM
     AuthApiFactory: AuthApiFactory(new Configuration({ basePath: appConfig.apiUrl })),
   };

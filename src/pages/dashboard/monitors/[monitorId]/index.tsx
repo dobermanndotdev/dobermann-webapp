@@ -99,7 +99,7 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
         </Card>
       )}
 
-      <Card title="Incidents">
+      <Card className="mt-4" title="Incidents">
         <IncidentTable incidents={monitor.incidents} />
       </Card>
     </DashboardLayout>

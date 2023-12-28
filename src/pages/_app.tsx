@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "remixicon/fonts/remixicon.css";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function DobermannApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <ToastContainer />
@@ -13,4 +13,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default DobermannApp;

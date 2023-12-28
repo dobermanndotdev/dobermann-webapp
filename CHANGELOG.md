@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/flowck/dobermann-webapp/compare/v1.17.0...v1.18.0) (2023-12-28)
+
+
+### Features
+
+* **#37:** auto-login it the token is valid ([#39](https://github.com/flowck/dobermann-webapp/issues/39)) ([e9fb8ed](https://github.com/flowck/dobermann-webapp/commit/e9fb8edbaacb343dd8d05da3d18556db9df70821)), closes [#37](https://github.com/flowck/dobermann-webapp/issues/37)
+
 # [1.17.0](https://github.com/flowck/dobermann-webapp/compare/v1.16.0...v1.17.0) (2023-12-28)
 
 

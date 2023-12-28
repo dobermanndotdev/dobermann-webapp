@@ -3,10 +3,11 @@ import { Button } from "@@/common/components/Button";
 import { Heading } from "@@/common/components/Heading";
 import { InputField } from "@@/common/components/InputField";
 import { AuthLayout } from "@@/common/layouts/AuthLayout";
-import { apiClients } from "@@/common/libs/api";
-import { LOCALSTORAGE_AUTH_TOKEN, paths } from "@@/common/libs/contants";
+import { apiClients, ssrApiClients } from "@@/common/libs/api";
+import { COOKIE_AUTH_TOKEN, LOCALSTORAGE_AUTH_TOKEN, paths } from "@@/common/libs/contants";
 import { handleApiErrors, notify } from "@@/common/libs/errors";
 import { FormikHelpers, useFormik } from "formik";
+import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
@@ -86,3 +87,22 @@ function validator(values: FormFields) {
 
   return errors;
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  if (!req.cookies[COOKIE_AUTH_TOKEN]) {
+    return { props: {} };
+  }
+
+  try {
+    await ssrApiClients(req).AccountsApiFactory.getProfileDetails();
+
+    return {
+      redirect: {
+        permanent: false,
+        destination: paths.monitors,
+      },
+    };
+  } catch (error) {
+    return { props: {} };
+  }
+};

@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/flowck/dobermann-webapp/compare/v1.16.0...v1.17.0) (2023-12-28)
+
+
+### Features
+
+* **#28:** render the incidents table ([#38](https://github.com/flowck/dobermann-webapp/issues/38)) ([181570d](https://github.com/flowck/dobermann-webapp/commit/181570d3f6a8e64b9593c5164a358974441abaf3)), closes [#28](https://github.com/flowck/dobermann-webapp/issues/28)
+
 # [1.16.0](https://github.com/flowck/dobermann-webapp/compare/v1.15.1...v1.16.0) (2023-12-27)
 
 

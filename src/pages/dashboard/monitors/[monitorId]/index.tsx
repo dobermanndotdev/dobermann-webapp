@@ -6,6 +6,7 @@ import { apiClients, ssrApiClients } from "@@/common/libs/api";
 import { Monitor, ResponseTimeStat } from "@@/common/libs/apiClient";
 import { paths } from "@@/common/libs/contants";
 import { notify, notifyGenericError } from "@@/common/libs/errors";
+import { IncidentTable } from "@@/modules/Monitor/IncidentTable";
 import { LiveLastCheckedAt } from "@@/modules/Monitor/LiveLastCheckedAt";
 import { MonitorItemDetails } from "@@/modules/Monitor/MonitorItem";
 import { PauseToggler } from "@@/modules/Monitor/PauseToggler";
@@ -98,10 +99,9 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
         </Card>
       )}
 
-      {/* <section className="mt-6">
-        <PageSubTitle>Incidents</PageSubTitle>
-        <IncidentList incidents={monitor.incidents} />
-      </section> */}
+      <Card title="Incidents">
+        <IncidentTable incidents={monitor.incidents} />
+      </Card>
     </DashboardLayout>
   );
 }

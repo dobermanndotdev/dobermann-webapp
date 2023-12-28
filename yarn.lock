@@ -3166,11 +3166,6 @@ react-transition-group@2.9.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-uplot@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/react-uplot/-/react-uplot-0.0.8.tgz#20f4049ace4298dfb9e0aa4220f8d53cfc1f82de"
-  integrity sha512-gvMZfQbPFENB7bBCHjjtQIu8aQdnIOlqR8ksjmUHdpmlM16xK/IFCvzuzGaQhJGD5YRvrI1fcghgVIQTQ5LIgQ==
-
 react@^18:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
@@ -3812,11 +3807,6 @@ update-browserslist-db@^1.0.13:
   dependencies:
     escalade "^3.1.1"
     picocolors "^1.0.0"
-
-uplot@^1.6.27:
-  version "1.6.27"
-  resolved "https://registry.yarnpkg.com/uplot/-/uplot-1.6.27.tgz#d282b98ea17f8980eadb2b7d634a8b11dd4521aa"
-  integrity sha512-78U4ss5YeU65kQkOC/QAKiyII+4uo+TYUJJKvuxRzeSpk/s5sjpY1TL0agkmhHBBShpvLtmbHIEiM7+C5lBULg==
 
 uri-js@^4.2.2:
   version "4.4.1"

@@ -146,12 +146,6 @@ export interface FullIncident {
      * @type {string}
      * @memberof FullIncident
      */
-    'monitor_id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FullIncident
-     */
     'response_headers': string;
     /**
      * 

@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/flowck/dobermann-webapp/compare/v1.18.0...v1.19.0) (2023-12-29)
+
+
+### Features
+
+* **#20:** add incident page ([#41](https://github.com/flowck/dobermann-webapp/issues/41)) ([06b2d33](https://github.com/flowck/dobermann-webapp/commit/06b2d335c2c58d0961c7c346a768ea3330d0588f)), closes [#20](https://github.com/flowck/dobermann-webapp/issues/20) [#20](https://github.com/flowck/dobermann-webapp/issues/20)
+
 # [1.18.0](https://github.com/flowck/dobermann-webapp/compare/v1.17.0...v1.18.0) (2023-12-28)
 
 

@@ -2,6 +2,7 @@ import { Table, TableBody, TableCell, TableCol, TableHead, TableRow } from "@@/c
 import { Incident } from "@@/common/libs/apiClient";
 import { FULL_DATE_FORMAT, paths } from "@@/common/libs/contants";
 import { Dates } from "@@/common/libs/dates";
+import { getDuration } from "@@/modules/Incident/lib";
 import { useRouter } from "next/router";
 
 interface Props {
@@ -40,14 +41,4 @@ export function IncidentTable({ incidents }: Props) {
       </TableBody>
     </Table>
   );
-}
-
-function getDuration(startedAt: string, resolvedAt: string): string {
-  if (!resolvedAt) {
-    return Dates.fromNow(startedAt);
-  }
-
-  const diff = Dates.new(resolvedAt).diff(Dates.new(startedAt));
-
-  return Dates.duration(diff).humanize();
 }

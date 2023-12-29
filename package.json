@@ -11,7 +11,7 @@
     "docker:build": "docker build -t dobermann.dev/webapp:latest .",
     "docker:run": "docker run -p 3100:3100 -e PORT=3100 dobermann.dev/webapp:latest",
     "deploy:prd": "flyctl deploy --config ./fly.toml",
-    "openapi": "npx @openapitools/openapi-generator-cli generate -i ./dobermann/api/openapi.yml -g typescript-axios -o ./src/common/libs/apiClient",
+    "openapi": "npx @openapitools/openapi-generator-cli generate -i ./openapi.yml -g typescript-axios -o ./src/common/libs/apiClient",
     "submodule": "cd dobermann; git pull origin main"
   },
   "dependencies": {

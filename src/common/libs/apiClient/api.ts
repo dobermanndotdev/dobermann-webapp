@@ -146,6 +146,12 @@ export interface FullIncident {
      * @type {string}
      * @memberof FullIncident
      */
+    'monitor_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FullIncident
+     */
     'response_headers': string;
     /**
      * 
@@ -159,6 +165,12 @@ export interface FullIncident {
      * @memberof FullIncident
      */
     'response_status': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FullIncident
+     */
+    'response_body': string;
 }
 /**
  * 

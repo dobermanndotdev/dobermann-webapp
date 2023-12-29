@@ -13,6 +13,7 @@ export const paths = {
   createAccount: "/create-account",
 
   // helpers
+  toMonitor: (id: string) => `/dashboard/monitors/${id}`,
   toEditMonitor: (id: string) => `/dashboard/monitors/${id}/edit`,
   toIncident: (id: string) => `/dashboard/incidents/${id}`,
 };

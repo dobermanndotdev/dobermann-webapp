@@ -159,6 +159,12 @@ export interface FullIncident {
      * @memberof FullIncident
      */
     'response_status': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FullIncident
+     */
+    'response_body': string;
 }
 /**
  * 

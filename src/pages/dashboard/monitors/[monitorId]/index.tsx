@@ -1,6 +1,7 @@
 import { Button } from "@@/common/components/Button";
 import { ButtonLink } from "@@/common/components/ButtonLink";
 import { Card } from "@@/common/components/Card";
+import { Stat } from "@@/common/components/Stat";
 import { DashboardLayout } from "@@/common/layouts/DashboardLayout/DashboardLayout";
 import { apiClients, ssrApiClients } from "@@/common/libs/api";
 import { Monitor, ResponseTimeStat } from "@@/common/libs/apiClient";
@@ -80,17 +81,8 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="stat border">
-          <div className="stat-title">Last checked at</div>
-          <div className="stat-value">
-            <LiveLastCheckedAt value={monitor.last_checked_at || ""} />
-          </div>
-        </div>
-
-        <div className="stat border">
-          <div className="stat-title">Incidents</div>
-          <div className="stat-value">{monitor.incidents ? monitor.incidents.length : 0}</div>
-        </div>
+        <Stat label="Last checked at" value={<LiveLastCheckedAt value={monitor.last_checked_at || ""} />} />
+        <Stat label="Incidents" value={monitor.incidents.length || 0} />
       </div>
 
       {!!responseTimeStats.length && (

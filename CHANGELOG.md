@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/flowck/dobermann-webapp/compare/v1.19.0...v1.20.0) (2023-12-29)
+
+
+### Features
+
+* update dobermann repo ([#42](https://github.com/flowck/dobermann-webapp/issues/42)) ([5e27d42](https://github.com/flowck/dobermann-webapp/commit/5e27d4283062737b7ed2770b657667ba88207609))
+
 # [1.19.0](https://github.com/flowck/dobermann-webapp/compare/v1.18.0...v1.19.0) (2023-12-29)
 
 

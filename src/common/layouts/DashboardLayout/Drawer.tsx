@@ -1,32 +1,44 @@
-"use client";
-
-import { Icon } from "@@/common/components/Icon";
 import { paths } from "@@/common/libs/contants";
+import { ExclamationTriangleIcon, HomeIcon, LaptopIcon, PersonIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PropsWithChildren } from "react";
 
-export function Drawer({ children }: PropsWithChildren) {
+interface Props extends PropsWithChildren {}
+
+export function Drawer({ children }: Props) {
   const pathname = usePathname();
 
   return (
-    <div className="drawer lg:drawer-open">
-      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <section className="drawer-content px-10 py-10">{children}</section>
-      <div className="drawer-side min-h-full border-r">
-        <ul className="menu text-base-content w-60">
-          {links.map((link) => (
-            <li key={link.path} className="text-sm">
-              <Link href={link.path} className={pathname.includes(link.path) ? "active" : ""}>
-                {link.icon}
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+    <aside className="min-h-full border-r border-zinc-800 bg-zinc-900 relative">
+      <div className="text-white px-4 py-5">
+        <Link href={paths.home}>
+          <h1 className="text-lg">Dobermann</h1>
+        </Link>
       </div>
-    </div>
+
+      <ul className="text-white">
+        {links.map((link) => (
+          <li key={link.path} className="text-sm">
+            <Link
+              href={link.path}
+              className="h-full w-full flex gap-2 items-center px-4 py-2 hover:bg-zinc-800 transition-colors"
+            >
+              {link.icon}
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <div></div>
+    </aside>
   );
 }
 
-const links = [{ label: "Monitors", icon: <Icon name="ri-window-fill" />, path: paths.monitors }];
+const links = [
+  { label: "Home", icon: <HomeIcon />, path: paths.home },
+  { label: "Monitors", icon: <LaptopIcon />, path: paths.monitors },
+  { label: "Incidents", icon: <ExclamationTriangleIcon />, path: paths.incidents },
+  { label: "Users", icon: <PersonIcon />, path: "/dashboard/users" },
+];

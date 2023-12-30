@@ -2,12 +2,10 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
-  theme: {
-    extend: {},
-  },
+  theme: {},
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["lofi"],
+    themes: ["light"],
   },
 };
 export default config;

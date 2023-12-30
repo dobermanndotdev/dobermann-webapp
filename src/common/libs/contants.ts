@@ -4,6 +4,7 @@ export const SESSION_STORAGE_USER_DETAILS = "DOBERMANN_USER_DETAILS";
 export const FULL_DATE_FORMAT = "ddd, MMM D, YYYY h:mm:ss A";
 
 export const paths = {
+  home: "/dashboard",
   monitors: "/dashboard/monitors",
   addMonitor: "/dashboard/monitors/add",
   incidents: "/dashboard/incidents",

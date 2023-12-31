@@ -1,12 +1,19 @@
 import { AccountMenu } from "@@/modules/Account/AccountMenu";
+import styled from "@emotion/styled";
 
 export function Header() {
   return (
-    <header className="px-6 py-4 flex justify-between border-b border-zinc-800">
-      <div></div>
+    <Container>
       <div>
         <AccountMenu />
       </div>
-    </header>
+    </Container>
   );
 }
+
+const Container = styled.header`
+  display: flex;
+  // border: 1px solid red;
+  justify-content: flex-end;
+  padding: ${(p) => p.theme.space.sm} ${(p) => p.theme.space.md};
+`;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 interface Props {
   label: string;
@@ -8,14 +8,13 @@ interface Props {
 const Base = styled.div`
   width: 24px;
   height: 24px;
+  display: flex;
+  font-weight: bold;
   border-radius: 50%;
+  align-items: center;
+  justify-content: center;
   transition: outline 0.25s;
-  outline: 2px solid transparent;
-  background-color: var(--color-zinc-100);
-
-  &:hover {
-    outline: 2px solid var(--color-zinc-500);
-  }
+  background-color: ${(p) => p.theme.colors.zinc100};
 `;
 
 export function Avatar({ label, avatarUrl }: Props) {

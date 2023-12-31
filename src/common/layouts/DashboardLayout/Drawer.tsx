@@ -1,38 +1,33 @@
 import { paths } from "@@/common/libs/contants";
+import styled from "@emotion/styled";
 import { ExclamationTriangleIcon, HomeIcon, LaptopIcon, PersonIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PropsWithChildren } from "react";
 
-interface Props extends PropsWithChildren {}
-
-export function Drawer({ children }: Props) {
+export function Drawer() {
   const pathname = usePathname();
 
-  return (
-    <aside className="min-h-full border-r border-zinc-800 bg-zinc-900 relative">
-      <div className="text-white px-4 py-5">
-        <Link href={paths.home}>
-          <h1 className="text-lg">Dobermann</h1>
-        </Link>
-      </div>
+  console.log(pathname);
 
-      <ul className="text-white">
+  return (
+    <Base>
+      <LogoLink href={paths.home}>
+        <h1>Dobermann</h1>
+      </LogoLink>
+
+      <Menu>
         {links.map((link) => (
-          <li key={link.path} className="text-sm">
-            <Link
-              href={link.path}
-              className="h-full w-full flex gap-2 items-center px-4 py-2 hover:bg-zinc-800 transition-colors"
-            >
+          <li key={link.path}>
+            <Link href={link.path} className={`${pathname === link.path ? "drawer-menu-item--active" : ""}`}>
               {link.icon}
               {link.label}
             </Link>
           </li>
         ))}
-      </ul>
+      </Menu>
 
       <div></div>
-    </aside>
+    </Base>
   );
 }
 
@@ -42,3 +37,50 @@ const links = [
   { label: "Incidents", icon: <ExclamationTriangleIcon />, path: paths.incidents },
   { label: "Users", icon: <PersonIcon />, path: "/dashboard/users" },
 ];
+
+const LogoLink = styled(Link)`
+  text-decoration: none;
+  font-size: ${(p) => p.theme.text.xs};
+  color: ${(p) => p.theme.colors.white};
+`;
+
+const Base = styled.aside`
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100%;
+  position: fixed;
+  padding: ${(props) => props.theme.space.md};
+  color: ${(props) => props.theme.colors.light};
+  background-color: ${(props) => props.theme.colors.zinc800};
+  border-right: 1px solid ${(props) => props.theme.colors.zinc700};
+`;
+
+const Menu = styled.ul`
+  margin-top: ${(p) => p.theme.space.md};
+
+  li {
+    list-style: none;
+    margin-bottom: ${(p) => p.theme.space.xs};
+  }
+
+  a {
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.25s;
+    gap: ${(props) => props.theme.space.xs};
+    padding: ${(props) => props.theme.space.xs};
+    color: ${(props) => props.theme.colors.white};
+
+    &:hover {
+      background-color: ${(props) => props.theme.colors.zinc700};
+    }
+  }
+
+  .drawer-menu-item--active {
+    background-color: ${(props) => props.theme.colors.zinc700};
+  }
+`;

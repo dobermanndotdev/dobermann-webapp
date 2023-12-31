@@ -3,13 +3,14 @@ import { Dropdown, DropdownItem, DropdownLabel, DropdownSeparator } from "@@/com
 import { apiClients } from "@@/common/libs/api";
 import { User } from "@@/common/libs/apiClient";
 import { LOCALSTORAGE_AUTH_TOKEN, SESSION_STORAGE_USER_DETAILS } from "@@/common/libs/contants";
+import styled from "@emotion/styled";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import styled from "styled-components";
 
 export function AccountMenu() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const [open, setOpen] = useState(false);
   const initials = useMemo(() => {
     if (user?.first_name) {
       return user?.first_name.charAt(0);
@@ -42,7 +43,14 @@ export function AccountMenu() {
   };
 
   return (
-    <Dropdown Trigger={<Avatar label={initials} />}>
+    <Dropdown
+      onOpenChange={(isOpen) => setOpen(isOpen)}
+      Trigger={
+        <Trigger data-is-open={open}>
+          <Avatar label={initials} />
+        </Trigger>
+      }
+    >
       <DropdownLabel>
         <div>
           {user?.first_name} {user?.last_name}
@@ -57,6 +65,17 @@ export function AccountMenu() {
     </Dropdown>
   );
 }
+
+const Trigger = styled.div`
+  outline: none;
+  border-radius: 50%;
+  transition: border 0.25s;
+  border: 2px solid transparent;
+
+  &[data-is-open="true"] {
+    border: 2px solid ${(p) => p.theme.colors.primary900};
+  }
+`;
 
 const UserEmail = styled.span`
   color: var(--color-zinc-400);

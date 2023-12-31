@@ -63,7 +63,7 @@ export default function AddMonitorPage() {
           <SelectOption value="1800">30 minutes</SelectOption>
           <SelectOption value="3600">1 hour</SelectOption>
         </Select>
-        <Button type="submit" isLoading={f.isSubmitting} disabled={f.isSubmitting} className="btn-primary mt-4 w-48">
+        <Button type="submit" isLoading={f.isSubmitting} disabled={f.isSubmitting}>
           Add Monitor
         </Button>
       </form>

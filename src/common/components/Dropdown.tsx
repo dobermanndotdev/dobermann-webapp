@@ -1,15 +1,16 @@
+import styled from "@emotion/styled";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { PropsWithChildren, ReactNode } from "react";
-import styled from "styled-components";
 
 interface Props extends PropsWithChildren {
   Trigger: ReactNode;
+  onOpenChange?(open: boolean): void;
 }
 
-export function Dropdown({ Trigger, children }: Props) {
+export function Dropdown({ Trigger, children, onOpenChange }: Props) {
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger>{Trigger}</DropdownMenu.Trigger>
+    <DropdownMenu.Root onOpenChange={onOpenChange}>
+      <DropdownTrigger>{Trigger}</DropdownTrigger>
 
       <DropdownMenu.Portal>
         <Content align="end">{children}</Content>
@@ -53,4 +54,10 @@ export const DropdownSeparator = styled(DropdownMenu.Separator)`
   height: 2px;
   margin: var(--space-sm) 0;
   background-color: var(--color-zinc-800);
+`;
+
+const DropdownTrigger = styled(DropdownMenu.Trigger)`
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
 `;

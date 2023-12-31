@@ -10,20 +10,20 @@ interface Props extends PropsWithChildren {
 
 const Heading1 = styled.span`
   font-weight: 500;
-  color: var(--color-white);
+  color: ${(p) => p.theme.colors.white};
   font-size: var(--text-3xl);
 `;
 
 const Heading2 = styled.span`
   font-weight: 500;
-  color: var(--color-white);
+  color: ${(p) => p.theme.colors.white};
   font-size: var(--text-2xl);
 `;
 
 const Heading3 = styled.span`
   font-weight: 500;
-  color: var(--color-white);
-  font-size: var(--text-xl);
+  color: ${(p) => p.theme.colors.white};
+  font-size: ${(p) => p.theme.text.xl};
 `;
 
 export function Typography({ children, variant = "body", as: BaseComponent = "span" }: Props) {

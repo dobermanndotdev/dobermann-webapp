@@ -43,8 +43,10 @@ export const theme = {
     base: "16px",
     md: "18px",
     lg: "22px",
-    xl: "30px",
+    xl: "28px",
     "2xl": "36px",
     "3xl": "42px",
   },
 };
+
+export type Theme = typeof theme;

@@ -1,4 +1,5 @@
 import { Button } from "@@/common/components/Button";
+import { Form } from "@@/common/components/Form";
 import { InputField } from "@@/common/components/InputField";
 import { PageTitle } from "@@/common/components/PageTitle";
 import { Select, SelectOption } from "@@/common/components/Select";
@@ -23,7 +24,6 @@ export default function AddMonitorPage() {
         });
         router.push(paths.monitors);
       } catch (error) {
-        console.log(error);
         notify(handleApiErrors(error), { type: "error" });
         setSubmitting(false);
       }
@@ -40,7 +40,7 @@ export default function AddMonitorPage() {
   return (
     <DashboardLayout title="Add monitor">
       <PageTitle title="Add Monitor" />
-      <form className="flex flex-col gap-2" onSubmit={f.handleSubmit}>
+      <Form onSubmit={f.handleSubmit}>
         <InputField
           name="endpoint_url"
           label="Endpoint URL*"
@@ -63,10 +63,12 @@ export default function AddMonitorPage() {
           <SelectOption value="1800">30 minutes</SelectOption>
           <SelectOption value="3600">1 hour</SelectOption>
         </Select>
-        <Button type="submit" isLoading={f.isSubmitting} disabled={f.isSubmitting}>
-          Add Monitor
-        </Button>
-      </form>
+        <div>
+          <Button type="submit" size="sm" isLoading={f.isSubmitting} disabled={f.isSubmitting}>
+            Add Monitor
+          </Button>
+        </div>
+      </Form>
     </DashboardLayout>
   );
 }

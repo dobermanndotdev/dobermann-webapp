@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Select as RdSelect } from "@radix-ui/themes";
 import { ComponentPropsWithoutRef } from "react";
 import { InputContainer } from "./InputContainer";
 import { InputErrorMessage } from "./InputErrorMessage";
@@ -7,40 +8,28 @@ import { Label } from "./Label";
 interface Props extends ComponentPropsWithoutRef<"select"> {
   label?: string;
   error?: string;
+  defaultValue?: string;
+  size?: number | undefined;
+  onValueChange(value: string): void;
 }
 
-export function Select({ label, error, className, children, ...props }: Props) {
+export function Select({ label, error, children, onValueChange, defaultValue, disabled }: Props) {
   return (
     <InputContainer>
       {!!label && <Label>{label}</Label>}
-      <SelectField {...props} className={`select select-bordered w-full ${className}`}>
-        {children}
-      </SelectField>
+      <SelectRoot disabled={disabled} onValueChange={onValueChange} defaultValue={defaultValue}>
+        <SelectTrigger className="select-trigger" />
+        <RdSelect.Content align="end">{children}</RdSelect.Content>
+      </SelectRoot>
       {error && <InputErrorMessage>{error}</InputErrorMessage>}
     </InputContainer>
   );
 }
 
-interface SelectOptionProps extends ComponentPropsWithoutRef<"option"> {}
+const SelectRoot = styled(RdSelect.Root)``;
 
-export function SelectOption({ children, ...props }: SelectOptionProps) {
-  return <option {...props}>{children}</option>;
-}
-
-const SelectField = styled.select`
-  appearance: none;
-  -webkit-appearance: none;
+const SelectTrigger = styled(RdSelect.Trigger)`
   cursor: pointer;
-  border-radius: 3px;
-  transition: outline 0.05s;
-  font-size: ${(p) => p.theme.text.sm};
-  color: ${(p) => p.theme.colors.white};
-  padding: 10px ${(p) => p.theme.space.sm};
-  background-color: ${(p) => p.theme.colors.zinc800};
-  border: 1px solid ${(p) => p.theme.colors.zinc500};
-
-  &:focus {
-    border-color: transparent;
-    outline: 2px solid ${(p) => p.theme.colors.primary800};
-  }
 `;
+
+export const SelectOption = RdSelect.Item;

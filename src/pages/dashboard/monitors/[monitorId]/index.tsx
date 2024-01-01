@@ -1,6 +1,11 @@
+import { Badge } from "@@/common/components/Badge";
 import { Card } from "@@/common/components/Card";
+import { Flex } from "@@/common/components/Flex";
+import { Grid } from "@@/common/components/Grid";
+import { Heading } from "@@/common/components/Heading";
 import { PageTitle } from "@@/common/components/PageTitle";
 import { Stat } from "@@/common/components/Stat";
+import { Text } from "@@/common/components/Text";
 import { DashboardLayout } from "@@/common/layouts/DashboardLayout/DashboardLayout";
 import { apiClients, ssrApiClients } from "@@/common/libs/api";
 import { Monitor, ResponseTimeStat } from "@@/common/libs/apiClient";
@@ -8,9 +13,9 @@ import { paths } from "@@/common/libs/contants";
 import { notify, notifyGenericError } from "@@/common/libs/errors";
 import { IncidentTable } from "@@/modules/Monitor/IncidentTable";
 import { LiveLastCheckedAt } from "@@/modules/Monitor/LiveLastCheckedAt";
-import { MonitorItemDetails } from "@@/modules/Monitor/MonitorItem";
 import { ResponseTimeStatsChart } from "@@/modules/Monitor/ResponseTimeStatsChart";
 import { useLiveMonitor } from "@@/modules/Monitor/hooks";
+import { CheckIcon } from "@radix-ui/react-icons";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
@@ -50,34 +55,34 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
       title={`Monitor ${monitor.endpoint_url}`}
       breadcrumbReplacer={{ key: "[monitorId]", pathname: monitor.id, label: monitor.endpoint_url }}
     >
-      <PageTitle title={`Monitor ${monitor.endpoint_url}`}></PageTitle>
-      <div>
-        <div>
-          <h1>{monitor.endpoint_url}</h1>
-          <MonitorItemDetails
-            className="mt-1"
-            isLoading={isLoading}
-            isPaused={monitor.is_paused}
-            isUp={monitor.is_endpoint_up}
-            checkIntervalInSeconds={monitor.check_interval_in_seconds}
-          />
-        </div>
-      </div>
+      <PageTitle title={monitor.endpoint_url}>
+        <Flex gap="2">
+          <Badge>
+            <CheckIcon />
+            Up for 3 days
+          </Badge>
+          <Text size="2">Checked every 3 minutes</Text>
+        </Flex>
+      </PageTitle>
 
-      <div className="grid grid-cols-2 gap-4">
+      <Grid columns="2" gap="4" width="auto" mb="5">
         <Stat label="Last checked at" value={<LiveLastCheckedAt value={monitor.last_checked_at || ""} />} />
         <Stat label="Incidents" value={monitor.incidents.length || 0} />
-      </div>
+      </Grid>
 
+      <Heading size="4" mb="2">
+        Response time
+      </Heading>
       {!!responseTimeStats.length && (
-        <Card title="Response times" className="mt-4">
+        <Card size="2" mb="5">
           <ResponseTimeStatsChart monitorId={monitor.id} responseTimeStats={responseTimeStats} className="mt-4" />
         </Card>
       )}
 
-      <Card className="mt-4" title="Incidents">
-        <IncidentTable incidents={monitor.incidents} />
-      </Card>
+      <Heading size="4" mb="2">
+        Incidents
+      </Heading>
+      <IncidentTable incidents={monitor.incidents} />
     </DashboardLayout>
   );
 }

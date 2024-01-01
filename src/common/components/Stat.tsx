@@ -1,4 +1,7 @@
 import { ReactNode } from "react";
+import { Card } from "./Card";
+import { Heading } from "./Heading";
+import { Text } from "./Text";
 
 interface Props {
   label: string;
@@ -7,9 +10,9 @@ interface Props {
 
 export function Stat({ label, value }: Props) {
   return (
-    <div className="stat border">
-      <div className="text-zinc-500 text-sm">{label}</div>
-      <div className="font-bold text-xl">{value}</div>
-    </div>
+    <Card size="2">
+      <Text size="1">{label}</Text>
+      <Heading>{value}</Heading>
+    </Card>
   );
 }

@@ -13,7 +13,7 @@ export function IncidentTable({ incidents }: Props) {
   const router = useRouter();
 
   return (
-    <Table>
+    <Table variant="surface">
       <TableHeader>
         <TableRow>
           {<TableCol>Status</TableCol>}

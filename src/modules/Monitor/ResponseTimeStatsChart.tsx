@@ -1,8 +1,9 @@
-import { Button } from "@@/common/components/Button";
+import { Select, SelectOption } from "@@/common/components/Select";
 import { Serie, SerieDataPoint, TimeseriesChart } from "@@/common/components/TimeseriesChart";
 import { apiClients } from "@@/common/libs/api";
 import { ResponseTimeStat } from "@@/common/libs/apiClient";
 import { Dates } from "@@/common/libs/dates";
+import { Flex } from "@radix-ui/themes";
 import { useMemo, useState } from "react";
 
 interface Props {
@@ -26,9 +27,8 @@ interface ViewTypeConfig {
 }
 
 export function ResponseTimeStatsChart({
-  responseTimeStats: initialData,
-  className,
   monitorId,
+  responseTimeStats: initialData,
   defaultViewType = VIEW_TYPES.DAILY,
 }: Props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -47,37 +47,31 @@ export function ResponseTimeStatsChart({
   };
 
   return (
-    <div className={className}>
-      <header className="flex justify-between mb-2">
+    <div>
+      <Flex mb="4" justify="between">
         <div></div>
-        <div className="flex gap-1 border p-[2px]">
+        <Select defaultValue={viewType} onValueChange={handleViewTypeChange}>
           {viewTypes.map((vt) => (
-            <Button
-              key={vt.id}
-              disabled={isLoading}
-              isLoading={vt.id === viewType && isLoading}
-              onClick={() => handleViewTypeChange(vt.id)}
-              className={`btn btn-xs ${viewType === vt.id ? "btn-active" : "btn-ghost"}`}
-            >
+            <SelectOption key={vt.id} value={vt.id}>
               {vt.label}
-            </Button>
+            </SelectOption>
           ))}
-        </div>
-      </header>
-      <TimeseriesChart
-        series={series}
-        tickFormatter={(val, index) => {
-          switch (viewType) {
-            case VIEW_TYPES.DAILY:
-              return Dates.format(val, "hh:mma");
-            default:
-              return Dates.format(val, "MM/DD hh:mma");
-          }
-        }}
-      />
+        </Select>
+      </Flex>
+
+      <TimeseriesChart series={series} tickFormatter={tickFormatter(viewType)} />
     </div>
   );
 }
+
+const tickFormatter = (viewType: ViewType) => (val: string, index: number) => {
+  switch (viewType) {
+    case VIEW_TYPES.DAILY:
+      return Dates.format(val, "hh:mma");
+    default:
+      return Dates.format(val, "MM/DD hh:mma");
+  }
+};
 
 function mapResponseTimesToSeries(responseTimeStats: ResponseTimeStat[]) {
   const mapper: Record<string, Serie> = {};

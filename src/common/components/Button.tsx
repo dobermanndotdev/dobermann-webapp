@@ -14,7 +14,7 @@ interface Props extends ComponentPropsWithoutRef<"button"> {
   variant?: "classic" | "solid" | "soft" | "surface" | "outline" | "ghost";
 }
 
-export function Button({ size = "2", asChild = false, children, isLoading, href, onClick, ...props }: Props) {
+export function Button({ size = "2", asChild = false, children, isLoading, href, ...props }: Props) {
   return (
     <Container {...props}>
       <Label data-is-loading={isLoading}>{children}</Label>

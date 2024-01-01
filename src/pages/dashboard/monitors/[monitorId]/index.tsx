@@ -13,9 +13,11 @@ import { paths } from "@@/common/libs/contants";
 import { notify, notifyGenericError } from "@@/common/libs/errors";
 import { IncidentTable } from "@@/modules/Monitor/IncidentTable";
 import { LiveLastCheckedAt } from "@@/modules/Monitor/LiveLastCheckedAt";
+import MonitorOptionMenu from "@@/modules/Monitor/MonitorOptionMenu";
 import { ResponseTimeStatsChart } from "@@/modules/Monitor/ResponseTimeStatsChart";
 import { useLiveMonitor } from "@@/modules/Monitor/hooks";
-import { CheckIcon } from "@radix-ui/react-icons";
+import { formatCheckIntervalToMinutes } from "@@/modules/Monitor/lib";
+import { CheckIcon, PauseIcon } from "@radix-ui/react-icons";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
@@ -55,13 +57,29 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
       title={`Monitor ${monitor.endpoint_url}`}
       breadcrumbReplacer={{ key: "[monitorId]", pathname: monitor.id, label: monitor.endpoint_url }}
     >
-      <PageTitle title={monitor.endpoint_url}>
+      <PageTitle
+        title={monitor.endpoint_url}
+        CallToAction={
+          <MonitorOptionMenu onPauseChange={refreshMonitor} paused={monitor.is_paused} monitorId={monitor.id} />
+        }
+      >
         <Flex gap="2">
-          <Badge>
-            <CheckIcon />
-            Up for 3 days
-          </Badge>
-          <Text size="2">Checked every 3 minutes</Text>
+          {monitor.is_paused && (
+            <Badge color="orange">
+              <PauseIcon />
+              Paused
+            </Badge>
+          )}
+
+          {!monitor.is_paused && (
+            <>
+              <Badge>
+                <CheckIcon />
+                Up for 3 days
+              </Badge>
+              <Text size="2">Checked every {formatCheckIntervalToMinutes(monitor.check_interval_in_seconds)}</Text>
+            </>
+          )}
         </Flex>
       </PageTitle>
 

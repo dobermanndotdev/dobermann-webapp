@@ -1,4 +1,6 @@
 import { Button } from "@@/common/components/Button";
+import { Flex } from "@@/common/components/Flex";
+import { Form } from "@@/common/components/Form";
 import { InputField } from "@@/common/components/InputField";
 import { PageTitle } from "@@/common/components/PageTitle";
 import { Select, SelectOption } from "@@/common/components/Select";
@@ -52,7 +54,7 @@ export default function EditMonitorPage({ monitor }: Props) {
       breadcrumbReplacer={{ key: "[monitorId]", pathname: monitor.id, label: monitor.endpoint_url }}
     >
       <PageTitle title={`Edit monitor ${monitor.endpoint_url}`} />
-      <form className="flex flex-col gap-2" onSubmit={f.handleSubmit}>
+      <Form className="flex flex-col gap-2" onSubmit={f.handleSubmit}>
         <InputField
           name="endpoint_url"
           label="Endpoint URL*"
@@ -63,10 +65,10 @@ export default function EditMonitorPage({ monitor }: Props) {
         />
         <Select
           label="Check interval*"
-          onChange={f.handleChange}
           name="check_interval_in_seconds"
           error={f.errors.check_interval_in_seconds}
           defaultValue={f.values.check_interval_in_seconds}
+          onValueChange={(value) => f.setFieldValue("check_interval_in_seconds", value)}
         >
           <SelectOption value="30">30 seconds</SelectOption>
           <SelectOption value="60">1 minute</SelectOption>
@@ -76,10 +78,25 @@ export default function EditMonitorPage({ monitor }: Props) {
           <SelectOption value="1800">30 minutes</SelectOption>
           <SelectOption value="3600">1 hour</SelectOption>
         </Select>
-        <Button type="submit" isLoading={f.isSubmitting} disabled={f.isSubmitting} className="btn-primary mt-4 w-48">
-          Save
-        </Button>
-      </form>
+
+        <Flex gap="2">
+          <Button type="submit" isLoading={f.isSubmitting} disabled={f.isSubmitting}>
+            Save
+          </Button>
+          <Button
+            variant="outline"
+            color="gray"
+            type="button"
+            disabled={f.isSubmitting}
+            onClick={() => {
+              console.log("returning back");
+              router.back();
+            }}
+          >
+            Cancel
+          </Button>
+        </Flex>
+      </Form>
     </DashboardLayout>
   );
 }

@@ -8,8 +8,8 @@ import { Label } from "./Label";
 interface Props extends ComponentPropsWithoutRef<"select"> {
   label?: string;
   error?: string;
-  defaultValue?: string;
   size?: number | undefined;
+  defaultValue?: string | number;
   onValueChange(value: string): void;
 }
 
@@ -17,7 +17,7 @@ export function Select({ label, error, children, onValueChange, defaultValue, di
   return (
     <InputContainer>
       {!!label && <Label>{label}</Label>}
-      <SelectRoot disabled={disabled} onValueChange={onValueChange} defaultValue={defaultValue}>
+      <SelectRoot disabled={disabled} onValueChange={onValueChange} defaultValue={defaultValue?.toString()}>
         <SelectTrigger className="select-trigger" />
         <RdSelect.Content align="end">{children}</RdSelect.Content>
       </SelectRoot>

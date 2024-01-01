@@ -25,6 +25,7 @@ export const theme = {
     zinc600: "#52525b",
     zinc700: "#3f3f46",
     zinc800: "#27272a",
+    zinc850: "#212123",
     zinc900: "#18181b",
     zinc950: "#09090b",
   },

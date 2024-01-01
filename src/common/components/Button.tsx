@@ -8,18 +8,21 @@ interface Props extends ComponentPropsWithoutRef<"button"> {
   size?: "sm" | "md" | "lg";
   color?: "primary" | "secondary";
   variant?: "text" | "contained" | "outlined";
+  href?: string;
 }
 
-export function Button({
-  children,
-  color = "primary",
-  size = "sm",
-  variant = "contained",
-  isLoading,
-  ...props
-}: Props) {
+export function Button({ children, isLoading, href, ...props }: Props) {
+  const { size = "sm", color = "primary", variant = "contained", ...rest } = props;
+
   return (
-    <Container data-color={color} data-size={size} data-variant={variant} {...props}>
+    <Container
+      href={href}
+      data-size={size}
+      data-color={color}
+      data-variant={variant}
+      as={href ? "a" : "button"}
+      {...rest}
+    >
       <Label data-is-loading={isLoading}>{children}</Label>
       {isLoading && (
         <SpinnerContainer>
@@ -44,11 +47,12 @@ const SpinnerContainer = styled.div`
 `;
 
 const Container = styled.button<Props>`
-  position: relative;
   cursor: pointer;
-  font-weight: bold;
   appearance: none;
+  font-weight: bold;
+  position: relative;
   border-radius: 3px;
+  text-decoration: none;
   transition: all 0.25s;
   -webkit-appearance: none;
   border: 1px solid transparent;
@@ -82,21 +86,23 @@ const Container = styled.button<Props>`
   }
 
   &[data-size="sm"] {
-    padding: 10px ${theme.space.lg};
+    padding: 8px ${theme.space.lg};
     font-size: ${(p) => p.theme.text.sm};
   }
 
   &[data-size="md"] {
-    padding: ${theme.space.sm} ${theme.space["2xl"]};
     font-size: ${(p) => p.theme.text.sm};
+    padding: ${theme.space.sm} ${theme.space["2xl"]};
   }
 
   &[data-size="lg"] {
-    padding: ${theme.space.md} ${theme.space["3xl"]};
     font-size: ${(p) => p.theme.text.sm};
+    padding: ${theme.space.md} ${theme.space["3xl"]};
   }
 
   :focus {
     outline: none;
   }
 `;
+
+export const BaseButton = Container;

@@ -8,6 +8,10 @@ export const middleware = async (request: NextRequest) => {
     return NextResponse.redirect(new URL(paths.login, request.url));
   }
 
+  if (url.pathname === "/dashboard") {
+    return NextResponse.redirect(new URL(paths.home, request.url));
+  }
+
   return NextResponse.next();
 };
 

@@ -7,8 +7,6 @@ import { usePathname } from "next/navigation";
 export function Drawer() {
   const pathname = usePathname();
 
-  console.log(pathname);
-
   return (
     <Base>
       <LogoLink href={paths.home}>
@@ -18,15 +16,13 @@ export function Drawer() {
       <Menu>
         {links.map((link) => (
           <li key={link.path}>
-            <Link href={link.path} className={`${pathname === link.path ? "drawer-menu-item--active" : ""}`}>
+            <Link href={link.path} className={`${pathname.startsWith(link.path) ? "drawer-menu-item--active" : ""}`}>
               {link.icon}
               {link.label}
             </Link>
           </li>
         ))}
       </Menu>
-
-      <div></div>
     </Base>
   );
 }

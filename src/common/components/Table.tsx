@@ -1,69 +1,47 @@
+import { css } from "@emotion/css";
 import styled from "@emotion/styled";
-import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
+import { ChevronRightIcon } from "@radix-ui/react-icons";
+import { Table as RdTable } from "@radix-ui/themes";
+import { ComponentPropsWithoutRef } from "react";
 
-interface Props extends ComponentPropsWithoutRef<"table"> {}
+export const Table = RdTable.Root;
 
-export function Table({ children, ...props }: Props) {
-  return (
-    <Container className="table table-zebra" {...props}>
-      {children}
-    </Container>
-  );
+export const TableBody = RdTable.Body;
+export const TableCell = RdTable.Cell;
+export const TableHeader = RdTable.Header;
+export const TableCol = RdTable.ColumnHeaderCell;
+
+export function TableRow({ children, onClick }: ComponentPropsWithoutRef<"tr">) {
+  return <BaseTableRow onClick={onClick}>{children}</BaseTableRow>;
 }
 
-const Container = styled.table`
-  width: 100%;
-  border-spacing: 0;
-  border-radius: 5px;
-  border-collapse: separate;
-  overflow: hidden;
-  border: 1px solid ${(p) => p.theme.colors.zinc500};
-
-  thead tr {
-    font-size: ${(p) => p.theme.text.sm};
-    background-color: ${(p) => p.theme.colors.zinc800};
-  }
-
-  thead tr th {
-    border-bottom: 1px solid ${(p) => p.theme.colors.zinc500};
-
-    &:last-child {
-      border-right: 1px solid ${(p) => p.theme.colors.zinc500};
-    }
-  }
-
-  tbody tr {
-  }
-
-  th,
-  td {
-    text-align: left;
-    padding: var(--space-sm);
-    color: var(--color-white);
-    font-size: var(--space-sm);
-  }
-`;
-
-export const TableRow = styled.tr`
-  transition: background-color 0.25s;
-  background-color: ${(p) => p.theme.colors.zinc850};
+const BaseTableRow = styled(RdTable.Row)`
   cursor: ${(p) => (p.onClick ? "pointer" : "initial")};
 
+  td {
+    transition: background-color 0.25s;
+  }
+
   &:hover {
-    background-color: ${(p) => (p.onClick ? p.theme.colors.zinc800 : p.theme.colors.zinc850)};
+    td {
+      background-color: ${(p) => (p.onClick ? "var(--gray-a2)" : "initial")};
+    }
   }
 `;
 
-export function TableHead({ children, ...props }: PropsWithChildren) {
-  return <thead {...props}>{children}</thead>;
+export function TableCellLinkIcon() {
+  return (
+    <TableCell style={{ textAlign: "right" }}>
+      <div
+        className={css({
+          display: "flex",
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        })}
+      >
+        <ChevronRightIcon />
+      </div>
+    </TableCell>
+  );
 }
-
-export function TableCol({ children, ...props }: PropsWithChildren) {
-  return <th {...props}>{children}</th>;
-}
-
-export function TableBody({ children, ...props }: PropsWithChildren) {
-  return <tbody {...props}>{children}</tbody>;
-}
-
-export const TableCell = styled.td``;

@@ -5,7 +5,8 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-
+import { Theme } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ToastContainer } from "react-toastify";
@@ -20,7 +21,9 @@ function DobermannApp({ Component, pageProps }: AppProps) {
       </Head>
       <ToastContainer />
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <Theme appearance="dark" accentColor="green">
+          <Component {...pageProps} />
+        </Theme>
       </ThemeProvider>
     </>
   );

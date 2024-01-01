@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableCol, TableHead, TableRow } from "@@/common/components/Table";
+import { Table, TableBody, TableCell, TableCol, TableHeader, TableRow } from "@@/common/components/Table";
 import { Incident } from "@@/common/libs/apiClient";
 import { FULL_DATE_FORMAT, paths } from "@@/common/libs/contants";
 import { Dates } from "@@/common/libs/dates";
@@ -14,14 +14,14 @@ export function IncidentTable({ incidents }: Props) {
 
   return (
     <Table>
-      <TableHead>
+      <TableHeader>
         <TableRow>
           {<TableCol>Status</TableCol>}
           {<TableCol>Cause</TableCol>}
           {<TableCol>Started at</TableCol>}
           {<TableCol>Duration</TableCol>}
         </TableRow>
-      </TableHead>
+      </TableHeader>
       <TableBody>
         {incidents.map((incident) => (
           <TableRow

@@ -1,28 +1,22 @@
 import styled from "@emotion/styled";
+import { Button as RButton, Responsive } from "@radix-ui/themes";
 import { ComponentPropsWithoutRef } from "react";
-import { theme } from "../styles/theme";
+import { RadixColors } from "../styles/radix";
 import { Spinner } from "./Spinner";
 
 interface Props extends ComponentPropsWithoutRef<"button"> {
-  isLoading?: boolean;
-  size?: "sm" | "md" | "lg";
-  color?: "primary" | "secondary";
-  variant?: "text" | "contained" | "outlined";
   href?: string;
+  asChild?: false;
+  color?: RadixColors;
+  isLoading?: boolean;
+  highContrast?: boolean;
+  size?: Responsive<"1" | "2" | "3" | "4">;
+  variant?: "classic" | "solid" | "soft" | "surface" | "outline" | "ghost";
 }
 
-export function Button({ children, isLoading, href, ...props }: Props) {
-  const { size = "sm", color = "primary", variant = "contained", ...rest } = props;
-
+export function Button({ size = "2", asChild = false, children, isLoading, href, onClick, ...props }: Props) {
   return (
-    <Container
-      href={href}
-      data-size={size}
-      data-color={color}
-      data-variant={variant}
-      as={href ? "a" : "button"}
-      {...rest}
-    >
+    <Container {...props}>
       <Label data-is-loading={isLoading}>{children}</Label>
       {isLoading && (
         <SpinnerContainer>
@@ -42,67 +36,15 @@ const Label = styled.span`
 const SpinnerContainer = styled.div`
   top: 50%;
   left: 50%;
+  display: flex;
   position: absolute;
+  align-items: center;
   transform: translate(-50%, -50%);
 `;
 
-const Container = styled.button<Props>`
+const Container = styled(RButton)`
   cursor: pointer;
-  appearance: none;
-  font-weight: bold;
   position: relative;
-  border-radius: 3px;
-  text-decoration: none;
-  transition: all 0.25s;
-  -webkit-appearance: none;
-  border: 1px solid transparent;
-  color: ${(p) => p.theme.colors.white};
-
-  &[data-color="primary"] {
-    background-color: ${(p) => p.theme.colors.primary900};
-
-    &:hover {
-      background-color: ${(p) => p.theme.colors.primary800};
-    }
-  }
-
-  &[data-color="secondary"] {
-    border-color: ${(p) => p.theme.colors.zinc500};
-    background-color: ${(p) => p.theme.colors.zinc800};
-
-    &:hover {
-      border-color: ${(p) => p.theme.colors.zinc200};
-    }
-  }
-
-  &[data-variant="outlined"] {
-    border-color: ${(p) => p.theme.colors.zinc500};
-    background-color: transparent;
-
-    &:hover {
-      border-color: ${(p) => p.theme.colors.zinc200};
-      background-color: transparent;
-    }
-  }
-
-  &[data-size="sm"] {
-    padding: 8px ${theme.space.lg};
-    font-size: ${(p) => p.theme.text.sm};
-  }
-
-  &[data-size="md"] {
-    font-size: ${(p) => p.theme.text.sm};
-    padding: ${theme.space.sm} ${theme.space["2xl"]};
-  }
-
-  &[data-size="lg"] {
-    font-size: ${(p) => p.theme.text.sm};
-    padding: ${theme.space.md} ${theme.space["3xl"]};
-  }
-
-  :focus {
-    outline: none;
-  }
 `;
 
 export const BaseButton = Container;

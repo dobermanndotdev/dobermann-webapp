@@ -1,13 +1,21 @@
 import { Alert } from "@@/common/components/Alert";
 import { Badge } from "@@/common/components/Badge";
-import { Button } from "@@/common/components/Button";
+import { ButtonLink } from "@@/common/components/ButtonLink";
 import { PageTitle } from "@@/common/components/PageTitle";
-import { Table, TableBody, TableCell, TableCol, TableHead, TableRow } from "@@/common/components/Table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableCellLinkIcon,
+  TableCol,
+  TableHeader,
+  TableRow,
+} from "@@/common/components/Table";
 import { DashboardLayout } from "@@/common/layouts/DashboardLayout/DashboardLayout";
 import { ssrApiClients } from "@@/common/libs/api";
 import { Monitor } from "@@/common/libs/apiClient";
 import { paths } from "@@/common/libs/contants";
-import { ChevronRightIcon } from "@radix-ui/react-icons";
+import { PlusIcon } from "@radix-ui/react-icons";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
@@ -21,19 +29,27 @@ export default function MonitorsPage({ monitors }: Props) {
 
   return (
     <DashboardLayout title="Monitors">
-      <PageTitle title="Monitors" CallToAction={<Button href={paths.addMonitor}>Add Monitor</Button>} />
+      <PageTitle
+        title="Monitors"
+        CallToAction={
+          <ButtonLink href={paths.addMonitor}>
+            <PlusIcon />
+            Add Monitor
+          </ButtonLink>
+        }
+      />
 
       {!hasMonitors && <Alert>You {"haven't"} created a monitor yet.</Alert>}
 
-      <Table>
-        <TableHead>
+      <Table variant="surface">
+        <TableHeader>
           <TableRow>
             <TableCol>Endpoint URL</TableCol>
             <TableCol>Status</TableCol>
             <TableCol>Check Interval</TableCol>
             <TableCol></TableCol>
           </TableRow>
-        </TableHead>
+        </TableHeader>
 
         <TableBody>
           {monitors.map((monitor) => (
@@ -41,15 +57,15 @@ export default function MonitorsPage({ monitors }: Props) {
               <TableCell>{monitor.endpoint_url}</TableCell>
               <TableCell>
                 {!monitor.is_paused && (
-                  <Badge color="success">{!monitor.is_paused && monitor.is_endpoint_up ? "Up" : "Down"}</Badge>
+                  <Badge color={monitor.is_endpoint_up ? "green" : "red"}>
+                    {!monitor.is_paused && monitor.is_endpoint_up ? "Up" : "Down"}
+                  </Badge>
                 )}
 
-                {monitor.is_paused && <Badge color="warning">Paused</Badge>}
+                {monitor.is_paused && <Badge color="orange">Paused</Badge>}
               </TableCell>
               <TableCell>{formatCheckIntervalToMinutes(monitor.check_interval_in_seconds)} </TableCell>
-              <TableCell style={{ textAlign: "right" }}>
-                <ChevronRightIcon />
-              </TableCell>
+              <TableCellLinkIcon />
             </TableRow>
           ))}
         </TableBody>

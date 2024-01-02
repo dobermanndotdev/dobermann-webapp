@@ -17,7 +17,7 @@ import MonitorOptionMenu from "@@/modules/Monitor/MonitorOptionMenu";
 import { ResponseTimeStatsChart } from "@@/modules/Monitor/ResponseTimeStatsChart";
 import { useLiveMonitor } from "@@/modules/Monitor/hooks";
 import { formatCheckIntervalToMinutes } from "@@/modules/Monitor/lib";
-import { CheckIcon, PauseIcon } from "@radix-ui/react-icons";
+import { CheckIcon, Cross2Icon, PauseIcon } from "@radix-ui/react-icons";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
@@ -59,9 +59,7 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
     >
       <PageTitle
         title={monitor.endpoint_url}
-        CallToAction={
-          <MonitorOptionMenu onPauseChange={refreshMonitor} paused={monitor.is_paused} monitorId={monitor.id} />
-        }
+        CallToAction={<MonitorOptionMenu onPauseChange={refreshMonitor} monitor={monitor} />}
       >
         <Flex gap="2">
           {monitor.is_paused && (
@@ -73,10 +71,18 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
 
           {!monitor.is_paused && (
             <>
-              <Badge>
-                <CheckIcon />
-                Up for 3 days
-              </Badge>
+              {monitor.is_endpoint_up && (
+                <Badge>
+                  <CheckIcon />
+                  Up
+                </Badge>
+              )}
+              {!monitor.is_endpoint_up && (
+                <Badge color="red">
+                  <Cross2Icon />
+                  Down
+                </Badge>
+              )}
               <Text size="2">Checked every {formatCheckIntervalToMinutes(monitor.check_interval_in_seconds)}</Text>
             </>
           )}

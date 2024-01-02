@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Button as RButton, Responsive } from "@radix-ui/themes";
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef, forwardRef } from "react";
 import { RadixColors } from "../styles/radix";
 import { Spinner } from "./Spinner";
 
@@ -14,9 +14,11 @@ interface Props extends ComponentPropsWithoutRef<"button"> {
   variant?: "classic" | "solid" | "soft" | "surface" | "outline" | "ghost";
 }
 
-export function Button({ size = "2", asChild = false, children, isLoading, href, ...props }: Props) {
+export const Button = forwardRef<HTMLButtonElement, Props>(function Button(props, ref) {
+  const { size = "2", asChild = false, children, isLoading, href, ...rest } = props;
+
   return (
-    <Container {...props}>
+    <Container {...rest} ref={ref}>
       <Label data-is-loading={isLoading}>{children}</Label>
       {isLoading && (
         <SpinnerContainer>
@@ -25,7 +27,7 @@ export function Button({ size = "2", asChild = false, children, isLoading, href,
       )}
     </Container>
   );
-}
+});
 
 const Label = styled.span`
   &[data-is-loading="true"] {

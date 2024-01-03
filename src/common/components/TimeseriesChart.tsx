@@ -116,19 +116,6 @@ export function TimeseriesChart({ series, tickFormatter }: Props) {
   );
 }
 
-function genDailyTicks() {
-  let start = Dates.new().subtract(12, "hours").set("m", 0).set("s", 0);
-  const ticks = [start.toDate().getTime()];
-
-  for (let i = 0; i < 7; i++) {
-    start = start.add(3, "hours");
-    ticks.push(start.toDate().getTime());
-    console.log(start.toDate());
-  }
-
-  return ticks;
-}
-
 const Container = styled.div`
   height: 300px;
 `;

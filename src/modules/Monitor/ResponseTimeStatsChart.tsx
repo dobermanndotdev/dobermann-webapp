@@ -1,4 +1,4 @@
-import { Select, SelectOption } from "@@/common/components/Select";
+import { Select, SelectContent, SelectOption, SelectTrigger } from "@@/common/components/Select";
 import { Serie, SerieDataPoint, TimeseriesChart } from "@@/common/components/TimeseriesChart";
 import { apiClients } from "@@/common/libs/api";
 import { ResponseTimeStat } from "@@/common/libs/apiClient";
@@ -51,11 +51,14 @@ export function ResponseTimeStatsChart({
       <Flex mb="4" justify="between">
         <div></div>
         <Select defaultValue={viewType} onValueChange={handleViewTypeChange}>
-          {viewTypes.map((vt) => (
-            <SelectOption key={vt.id} value={vt.id}>
-              {vt.label}
-            </SelectOption>
-          ))}
+          <SelectTrigger />
+          <SelectContent>
+            {viewTypes.map((vt) => (
+              <SelectOption key={vt.id} value={vt.id}>
+                {vt.label}
+              </SelectOption>
+            ))}
+          </SelectContent>
         </Select>
       </Flex>
 

@@ -1,14 +1,17 @@
 import { Button } from "@@/common/components/Button";
 import { Flex } from "@@/common/components/Flex";
 import { Form } from "@@/common/components/Form";
+import { FormControl } from "@@/common/components/FormControl";
 import { InputField } from "@@/common/components/InputField";
 import { PageTitle } from "@@/common/components/PageTitle";
-import { Select, SelectOption } from "@@/common/components/Select";
+import { Select, SelectContent, SelectOption, SelectTrigger } from "@@/common/components/Select";
 import { DashboardLayout } from "@@/common/layouts/DashboardLayout/DashboardLayout";
 import { apiClients, ssrApiClients } from "@@/common/libs/api";
 import { Monitor } from "@@/common/libs/apiClient";
 import { paths } from "@@/common/libs/contants";
 import { handleApiErrors, notify } from "@@/common/libs/errors";
+import { styled } from "@@/common/styles/emotion";
+import { Grid } from "@radix-ui/themes";
 import { FormikHelpers, useFormik } from "formik";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
@@ -55,47 +58,44 @@ export default function EditMonitorPage({ monitor }: Props) {
     >
       <PageTitle title={`Edit monitor ${monitor.endpoint_url}`} />
       <Form className="flex flex-col gap-2" onSubmit={f.handleSubmit}>
-        <InputField
-          name="endpoint_url"
-          label="Endpoint URL*"
-          onInput={f.handleChange}
-          error={f.errors.endpoint_url}
-          defaultValue={f.values.endpoint_url}
-          placeholder="https://api.my.com/health"
-        />
-        <Select
-          label="Check interval*"
-          name="check_interval_in_seconds"
-          error={f.errors.check_interval_in_seconds}
-          defaultValue={f.values.check_interval_in_seconds}
-          onValueChange={(value) => f.setFieldValue("check_interval_in_seconds", value)}
-        >
-          <SelectOption value="30">30 seconds</SelectOption>
-          <SelectOption value="60">1 minute</SelectOption>
-          <SelectOption value="180">3 minutes</SelectOption>
-          <SelectOption value="300">5 minutes</SelectOption>
-          <SelectOption value="900">15 minutes</SelectOption>
-          <SelectOption value="1800">30 minutes</SelectOption>
-          <SelectOption value="3600">1 hour</SelectOption>
-        </Select>
+        <Grid columns="2" gap="4">
+          <FormControl error={f.errors.endpoint_url} label="Endpoint URL*">
+            <InputField
+              name="endpoint_url"
+              onInput={f.handleChange}
+              defaultValue={f.values.endpoint_url}
+              placeholder="https://api.my.com/health"
+            />
+          </FormControl>
 
-        <Flex gap="2">
+          <FormControl label="Check interval*" error={f.errors.check_interval_in_seconds}>
+            <Select
+              name="check_interval_in_seconds"
+              defaultValue={`${f.values.check_interval_in_seconds}`}
+              onValueChange={(value) => f.setFieldValue("check_interval_in_seconds", value)}
+            >
+              <SelectTrigger />
+              <SelectContent>
+                <SelectOption value="30">30 seconds</SelectOption>
+                <SelectOption value="60">1 minute</SelectOption>
+                <SelectOption value="180">3 minutes</SelectOption>
+                <SelectOption value="300">5 minutes</SelectOption>
+                <SelectOption value="900">15 minutes</SelectOption>
+                <SelectOption value="1800">30 minutes</SelectOption>
+                <SelectOption value="3600">1 hour</SelectOption>
+              </SelectContent>
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <FormControls gap="2">
           <Button type="submit" isLoading={f.isSubmitting} disabled={f.isSubmitting}>
             Save
           </Button>
-          <Button
-            variant="outline"
-            color="gray"
-            type="button"
-            disabled={f.isSubmitting}
-            onClick={() => {
-              console.log("returning back");
-              router.back();
-            }}
-          >
+          <Button variant="outline" color="gray" type="button" disabled={f.isSubmitting} onClick={() => router.back()}>
             Cancel
           </Button>
-        </Flex>
+        </FormControls>
       </Form>
     </DashboardLayout>
   );
@@ -141,3 +141,9 @@ function validator(values: FormFields) {
 
   return errors;
 }
+
+const FormControls = styled(Flex)`
+  button {
+    min-width: 120px;
+  }
+`;

@@ -1,25 +1,19 @@
-import { paths } from "@@/common/libs/contants";
 import { AccountMenu } from "@@/modules/Account/AccountMenu";
-import Link from "next/link";
-import { PropsWithChildren } from "react";
+import styled from "@emotion/styled";
 
 export function Header() {
   return (
-    <header className="px-6 flex justify-between border-b">
-      <div className="font-bold py-4">
-        <h1>
-          <Link href={paths.monitors}>Dobermann</Link>
-        </h1>
-      </div>
+    <Container>
       <div>
-        <MenuItem>
-          <AccountMenu />
-        </MenuItem>
+        <AccountMenu />
       </div>
-    </header>
+    </Container>
   );
 }
 
-function MenuItem({ children }: PropsWithChildren) {
-  return <div className="flex justify-center h-full hover:bg-gray-300 transition-colors duration-300">{children}</div>;
-}
+const Container = styled.header`
+  display: flex;
+  // border: 1px solid red;
+  justify-content: flex-end;
+  padding: ${(p) => p.theme.space.sm} ${(p) => p.theme.space.md};
+`;

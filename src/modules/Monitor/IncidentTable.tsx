@@ -1,4 +1,5 @@
-import { Table, TableBody, TableCell, TableCol, TableHead, TableRow } from "@@/common/components/Table";
+import { Callout } from "@@/common/components/Callout";
+import { Table, TableBody, TableCell, TableCol, TableHeader, TableRow } from "@@/common/components/Table";
 import { Incident } from "@@/common/libs/apiClient";
 import { FULL_DATE_FORMAT, paths } from "@@/common/libs/contants";
 import { Dates } from "@@/common/libs/dates";
@@ -12,16 +13,20 @@ interface Props {
 export function IncidentTable({ incidents }: Props) {
   const router = useRouter();
 
+  if (!incidents.length) {
+    return <Callout content="We have not registered any incident related to this monitor." />;
+  }
+
   return (
-    <Table>
-      <TableHead>
+    <Table variant="surface">
+      <TableHeader>
         <TableRow>
           {<TableCol>Status</TableCol>}
           {<TableCol>Cause</TableCol>}
           {<TableCol>Started at</TableCol>}
           {<TableCol>Duration</TableCol>}
         </TableRow>
-      </TableHead>
+      </TableHeader>
       <TableBody>
         {incidents.map((incident) => (
           <TableRow

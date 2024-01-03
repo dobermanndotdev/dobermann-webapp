@@ -1,4 +1,6 @@
+import styled from "@emotion/styled";
 import { PropsWithChildren, ReactNode } from "react";
+import { Typography } from "./Typography";
 
 interface Props extends PropsWithChildren {
   title: string;
@@ -7,12 +9,24 @@ interface Props extends PropsWithChildren {
 
 export function PageTitle({ children, title, CallToAction }: Props) {
   return (
-    <section className="mb-6">
-      <div className="flex justify-between items-center">
-        <h2 className="font-bold text-2xl">{title}</h2>
+    <Container>
+      <TitleAndAction>
+        <Typography variant="heading-3" as="h2">
+          {title}
+        </Typography>
         {CallToAction}
-      </div>
-      <div className="text-sm">{children}</div>
-    </section>
+      </TitleAndAction>
+      <div>{children}</div>
+    </Container>
   );
 }
+
+const Container = styled.section`
+  margin-bottom: ${(p) => p.theme.space.md};
+`;
+
+const TitleAndAction = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;

@@ -1,4 +1,7 @@
 import { Button } from "@@/common/components/Button";
+import { Form } from "@@/common/components/Form";
+import { FormControl } from "@@/common/components/FormControl";
+import { Grid } from "@@/common/components/Grid";
 import { InputField } from "@@/common/components/InputField";
 import { PageTitle } from "@@/common/components/PageTitle";
 import { Select, SelectOption } from "@@/common/components/Select";
@@ -6,6 +9,7 @@ import { DashboardLayout } from "@@/common/layouts/DashboardLayout/DashboardLayo
 import { apiClients } from "@@/common/libs/api";
 import { paths } from "@@/common/libs/contants";
 import { handleApiErrors, notify } from "@@/common/libs/errors";
+import { SelectContent, SelectTrigger } from "@radix-ui/themes";
 import { FormikHelpers, useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
@@ -23,7 +27,6 @@ export default function AddMonitorPage() {
         });
         router.push(paths.monitors);
       } catch (error) {
-        console.log(error);
         notify(handleApiErrors(error), { type: "error" });
         setSubmitting(false);
       }
@@ -40,33 +43,37 @@ export default function AddMonitorPage() {
   return (
     <DashboardLayout title="Add monitor">
       <PageTitle title="Add Monitor" />
-      <form className="flex flex-col gap-2" onSubmit={f.handleSubmit}>
-        <InputField
-          name="endpoint_url"
-          label="Endpoint URL*"
-          onInput={f.handleChange}
-          error={f.errors.endpoint_url}
-          placeholder="https://api.my.com/health"
-        />
-        <Select
-          defaultValue="180"
-          label="Check interval*"
-          onChange={f.handleChange}
-          name="check_interval_in_seconds"
-          error={f.errors.check_interval_in_seconds}
-        >
-          <SelectOption value="30">30 seconds</SelectOption>
-          <SelectOption value="60">1 minute</SelectOption>
-          <SelectOption value="180">3 minutes</SelectOption>
-          <SelectOption value="300">5 minutes</SelectOption>
-          <SelectOption value="900">15 minutes</SelectOption>
-          <SelectOption value="1800">30 minutes</SelectOption>
-          <SelectOption value="3600">1 hour</SelectOption>
-        </Select>
-        <Button type="submit" isLoading={f.isSubmitting} disabled={f.isSubmitting} className="btn-primary mt-4 w-48">
-          Add Monitor
-        </Button>
-      </form>
+      <Form onSubmit={f.handleSubmit}>
+        <Grid columns="2" gap="4">
+          <FormControl error={f.errors.endpoint_url} label="Endpoint URL*">
+            <InputField name="endpoint_url" onInput={f.handleChange} placeholder="https://api.my.com/health" />
+          </FormControl>
+
+          <FormControl label="Check interval*" error={f.errors.check_interval_in_seconds}>
+            <Select
+              defaultValue="180"
+              name="check_interval_in_seconds"
+              onValueChange={(value) => f.setFieldValue("check_interval_in_seconds", value)}
+            >
+              <SelectTrigger />
+              <SelectContent>
+                <SelectOption value="30">30 seconds</SelectOption>
+                <SelectOption value="60">1 minute</SelectOption>
+                <SelectOption value="180">3 minutes</SelectOption>
+                <SelectOption value="300">5 minutes</SelectOption>
+                <SelectOption value="900">15 minutes</SelectOption>
+                <SelectOption value="1800">30 minutes</SelectOption>
+                <SelectOption value="3600">1 hour</SelectOption>
+              </SelectContent>
+            </Select>
+          </FormControl>
+        </Grid>
+        <div>
+          <Button type="submit" isLoading={f.isSubmitting} disabled={f.isSubmitting}>
+            Add Monitor
+          </Button>
+        </div>
+      </Form>
     </DashboardLayout>
   );
 }

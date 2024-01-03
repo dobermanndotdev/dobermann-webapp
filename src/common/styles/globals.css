@@ -1,8 +1,79 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 html,
 body {
   min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+:root {
+  --space-xs: 6px;
+  --space-sm: 12px;
+  --space-md: 18px;
+  --space-lg: 24px;
+  --space-xl: 30px;
+  --space-2xl: 36px;
+  --space-3xl: 42px;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --base-base: 16px;
+  --text-md: 18px;
+  --text-lg: 22px;
+  --text-xl: 30px;
+  --text-2xl: 36px;
+  --text-3xl: 42px;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-primary-900: #198754;
+  --color-primary-800: #479f76;
+  --color-primary-700: #75b798;
+  --color-primary-600: #a3cfbb;
+  --color-primary-500: #d1e7dd;
+  --color-secondary: #6c757d;
+  --color-success: #198754;
+  --color-info: #0dcaf0;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+  --color-light: #ffffff;
+  --color-dark: #000000;
+
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
 }

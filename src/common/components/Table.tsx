@@ -1,32 +1,47 @@
-import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
+import { css } from "@emotion/css";
+import styled from "@emotion/styled";
+import { ChevronRightIcon } from "@radix-ui/react-icons";
+import { Table as RdTable } from "@radix-ui/themes";
+import { ComponentPropsWithoutRef } from "react";
 
-interface Props extends ComponentPropsWithoutRef<"table"> {}
-interface PropsTRow extends ComponentPropsWithoutRef<"tr"> {}
+export const Table = RdTable.Root;
 
-export function Table({ children, ...props }: Props) {
+export const TableBody = RdTable.Body;
+export const TableCell = RdTable.Cell;
+export const TableHeader = RdTable.Header;
+export const TableCol = RdTable.ColumnHeaderCell;
+
+export function TableRow({ children, onClick }: ComponentPropsWithoutRef<"tr">) {
+  return <BaseTableRow onClick={onClick}>{children}</BaseTableRow>;
+}
+
+const BaseTableRow = styled(RdTable.Row)`
+  cursor: ${(p) => (p.onClick ? "pointer" : "initial")};
+
+  td {
+    transition: background-color 0.25s;
+  }
+
+  &:hover {
+    td {
+      background-color: ${(p) => (p.onClick ? "var(--gray-a2)" : "initial")};
+    }
+  }
+`;
+
+export function TableCellLinkIcon() {
   return (
-    <table className="table table-zebra" {...props}>
-      {children}
-    </table>
+    <TableCell style={{ textAlign: "right" }}>
+      <div
+        className={css({
+          display: "flex",
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        })}
+      >
+        <ChevronRightIcon />
+      </div>
+    </TableCell>
   );
-}
-
-export function TableRow({ children, ...props }: PropsTRow) {
-  return <tr {...props}>{children}</tr>;
-}
-
-export function TableHead({ children, ...props }: PropsWithChildren) {
-  return <thead {...props}>{children}</thead>;
-}
-
-export function TableCol({ children, ...props }: PropsWithChildren) {
-  return <th {...props}>{children}</th>;
-}
-
-export function TableBody({ children, ...props }: PropsWithChildren) {
-  return <tbody {...props}>{children}</tbody>;
-}
-
-export function TableCell({ children, ...props }: PropsWithChildren) {
-  return <td {...props}>{children}</td>;
 }

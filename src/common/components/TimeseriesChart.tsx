@@ -1,8 +1,10 @@
+import styled from "@emotion/styled";
 import { scaleTime } from "d3-scale";
 import { timeDay, timeHour, timeMinute, timeMonth, timeSecond, timeWeek, timeYear } from "d3-time";
 import { timeFormat } from "d3-time-format";
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Dates } from "../libs/dates";
+import { theme } from "../styles/theme";
 import { Alert } from "./Alert";
 
 export interface Serie {
@@ -65,15 +67,16 @@ export function TimeseriesChart({ series, tickFormatter }: Props) {
   const timeScale = scaleTime().domain([domainMin, domainMax]);
 
   return (
-    <div className="h-[300px]">
+    <Container>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart width={500} height={300}>
-          <CartesianGrid strokeDasharray="0 0" vertical={false} />
+          <CartesianGrid stroke={theme.colors.zinc800} strokeDasharray="0 0" vertical={false} />
           <XAxis
             type="number"
             fontSize={12}
             scale={timeScale}
             dataKey="timestamp"
+            axisLine={false}
             tickFormatter={tickFormatter}
             ticks={timeScale.ticks(7).map((date) => date.valueOf())}
             domain={timeScale.domain().map((date) => date.valueOf())}
@@ -81,6 +84,8 @@ export function TimeseriesChart({ series, tickFormatter }: Props) {
           <YAxis
             fontSize={12}
             dataKey="value"
+            tickLine={false}
+            axisLine={false}
             label={{
               angle: -90,
               offset: 0,
@@ -92,6 +97,13 @@ export function TimeseriesChart({ series, tickFormatter }: Props) {
           />
           <Tooltip
             formatter={(val, name) => `${val} ms`}
+            contentStyle={{
+              borderRadius: "3px",
+              fontSize: theme.text.sm,
+              borderColor: theme.colors.zinc700,
+              backgroundColor: theme.colors.zinc900,
+            }}
+            labelStyle={{ fontSize: theme.text.sm }}
             labelFormatter={(timestamp) => Dates.format(timestamp, "lll")}
           />
           <Legend iconType="plainline" wrapperStyle={{ fontSize: 12 }} />
@@ -100,19 +112,10 @@ export function TimeseriesChart({ series, tickFormatter }: Props) {
           ))}
         </LineChart>
       </ResponsiveContainer>
-    </div>
+    </Container>
   );
 }
 
-function genDailyTicks() {
-  let start = Dates.new().subtract(12, "hours").set("m", 0).set("s", 0);
-  const ticks = [start.toDate().getTime()];
-
-  for (let i = 0; i < 7; i++) {
-    start = start.add(3, "hours");
-    ticks.push(start.toDate().getTime());
-    console.log(start.toDate());
-  }
-
-  return ticks;
-}
+const Container = styled.div`
+  height: 300px;
+`;

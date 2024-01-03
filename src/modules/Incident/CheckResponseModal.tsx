@@ -10,7 +10,9 @@ export function CheckResponseModal({ content }: Props) {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button>View response</Button>
+        <Button color="gray" variant="soft">
+          View response
+        </Button>
       </Dialog.Trigger>
 
       <Dialog.Content>

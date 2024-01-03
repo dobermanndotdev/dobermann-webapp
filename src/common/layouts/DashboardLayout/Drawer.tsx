@@ -1,3 +1,4 @@
+import { Text } from "@@/common/components/Text";
 import { paths } from "@@/common/libs/contants";
 import styled from "@emotion/styled";
 import { ExclamationTriangleIcon, HomeIcon, LaptopIcon, PersonIcon } from "@radix-ui/react-icons";
@@ -10,7 +11,7 @@ export function Drawer() {
   return (
     <Base>
       <LogoLink href={paths.home}>
-        <h1>Dobermann</h1>
+        <Text size="4">Dobermann</Text>
       </LogoLink>
 
       <Menu>

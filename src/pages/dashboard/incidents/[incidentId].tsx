@@ -1,12 +1,17 @@
+import { Badge } from "@@/common/components/Badge";
 import { ButtonLink } from "@@/common/components/ButtonLink";
 import { Card } from "@@/common/components/Card";
 import { Code } from "@@/common/components/Code";
+import { Grid } from "@@/common/components/Grid";
+import { Heading } from "@@/common/components/Heading";
+import { PageTitle } from "@@/common/components/PageTitle";
 import { Stat } from "@@/common/components/Stat";
 import { DashboardLayout } from "@@/common/layouts/DashboardLayout/DashboardLayout";
 import { ssrApiClients } from "@@/common/libs/api";
 import { FullIncident, Monitor } from "@@/common/libs/apiClient";
 import { FULL_DATE_FORMAT, paths } from "@@/common/libs/contants";
 import { Dates } from "@@/common/libs/dates";
+import { CheckResponseModal } from "@@/modules/Incident/CheckResponseModal";
 import { getDuration } from "@@/modules/Incident/lib";
 import { GetServerSideProps } from "next";
 
@@ -21,42 +26,63 @@ export default function IncidentPage({ incident, monitor }: Props) {
       title={`Incident ${incident.checked_url}`}
       breadcrumbReplacer={{ key: "[incidentId]", pathname: incident.id, label: incident.checked_url }}
     >
-      <header className="mb-8 flex justify-between items-center">
-        <div>
-          <h1 className="font-bold text-lg">Incident of {monitor.endpoint_url}</h1>
-          <span className={`badge ${!!incident.resolved_at ? "badge-success" : "badge-warning"}`}>
-            {!!incident.resolved_at ? "Resolved" : "Ongoing"}
-          </span>
-        </div>
-
-        <div>
-          <ButtonLink href={paths.toMonitor(monitor.id)} className="btn-sm btn-outline">
+      <PageTitle
+        title={`Incident of ${monitor.endpoint_url}`}
+        CallToAction={
+          <ButtonLink href={paths.toMonitor(monitor.id)} color="gray" variant="soft">
             Go to monitor
           </ButtonLink>
-        </div>
-      </header>
-      <section className="flex flex-col gap-4">
+        }
+      >
+        <Badge color={!!incident.resolved_at ? "green" : "red"}>
+          {!!incident.resolved_at ? "Resolved" : "Ongoing"}
+        </Badge>
+      </PageTitle>
+
+      <Grid columns="1" gap="5">
         <Card title="Cause">
-          <Code content={incident.cause} />
+          <Code color="gray">{incident.cause}</Code>
         </Card>
-        <div className="grid grid-cols-2 gap-4">
+
+        <Grid gap="4" columns="2">
           <Stat label="Started at" value={Dates.format(incident.created_at, FULL_DATE_FORMAT)} />
           <Stat label="Duration" value={getDuration(incident.created_at, incident.resolved_at || "")} />
+        </Grid>
+
+        <div>
+          <Heading size="4" mb="2">
+            Checked URL
+          </Heading>
+          <Card>
+            <Code color="gray">{incident.checked_url}</Code>
+          </Card>
         </div>
 
-        <Card title="Checked URL">
-          <Code content={incident.checked_url} />
-        </Card>
-        <Card title="Request headers">
-          <Code content={incident.request_headers} />
-        </Card>
-        <Card title="Response headers">
-          <Code content={incident.response_headers} />
-        </Card>
-        <Card title="Response">
-          <Code collapsable={true} content={incident.response_body} />
-        </Card>
-      </section>
+        <div>
+          <Heading size="4" mb="2">
+            Request headers
+          </Heading>
+          <Card>
+            <Code color="gray">{incident.request_headers}</Code>
+          </Card>
+        </div>
+
+        <div>
+          <Heading size="4" mb="2">
+            Response headers
+          </Heading>
+          <Card title="Response headers">
+            <Code color="gray">{incident.response_headers}</Code>
+          </Card>
+        </div>
+
+        <div>
+          <Heading size="4" mb="2">
+            Response
+          </Heading>
+          <CheckResponseModal content={incident.response_body} />
+        </div>
+      </Grid>
     </DashboardLayout>
   );
 }

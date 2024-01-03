@@ -14,7 +14,7 @@ const Base = styled.div`
   align-items: center;
   justify-content: center;
   transition: outline 0.25s;
-  background-color: ${(p) => p.theme.colors.zinc100};
+  background-color: ${(p) => p.theme.colors.zinc700};
 `;
 
 export function Avatar({ label, avatarUrl }: Props) {

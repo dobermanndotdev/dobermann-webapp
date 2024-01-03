@@ -1,3 +1,4 @@
+import { Callout } from "@@/common/components/Callout";
 import { Table, TableBody, TableCell, TableCol, TableHeader, TableRow } from "@@/common/components/Table";
 import { Incident } from "@@/common/libs/apiClient";
 import { FULL_DATE_FORMAT, paths } from "@@/common/libs/contants";
@@ -11,6 +12,10 @@ interface Props {
 
 export function IncidentTable({ incidents }: Props) {
   const router = useRouter();
+
+  if (!incidents.length) {
+    return <Callout content="We have not registered any incident related to this monitor." />;
+  }
 
   return (
     <Table variant="surface">

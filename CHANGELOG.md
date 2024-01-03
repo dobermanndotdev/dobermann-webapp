@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/flowck/dobermann-webapp/compare/v1.20.0...v1.21.0) (2024-01-03)
+
+
+### Features
+
+* new ui ([#44](https://github.com/flowck/dobermann-webapp/issues/44)) ([7870e3f](https://github.com/flowck/dobermann-webapp/commit/7870e3faee894ad71613db061dca3c770a88b276))
+
 # [1.20.0](https://github.com/flowck/dobermann-webapp/compare/v1.19.0...v1.20.0) (2023-12-29)
 
 

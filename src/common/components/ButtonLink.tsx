@@ -20,7 +20,7 @@ export function ButtonLink({ size = "2", asChild = false, children, isLoading, h
 
   const handler = useCallback(async () => {
     await router.push(href);
-  }, []);
+  }, [router, href]);
 
   return (
     <Container {...props} onClick={handler}>

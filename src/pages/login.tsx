@@ -1,5 +1,6 @@
 import { Alert } from "@@/common/components/Alert";
 import { Button } from "@@/common/components/Button";
+import { FormControl } from "@@/common/components/FormControl";
 import { Heading } from "@@/common/components/Heading";
 import { InputField } from "@@/common/components/InputField";
 import { AuthLayout } from "@@/common/layouts/AuthLayout";
@@ -51,14 +52,14 @@ export default function LoginPage() {
       {isAccountCreated && <Alert className="mt-4 alert-success">You account has been created successfully!</Alert>}
 
       <form className="mt-4 flex flex-col gap-2" onSubmit={f.handleSubmit}>
-        <InputField name="email" type="email" label="E-mail" onInput={f.handleChange} error={f.errors.email} />
-        <InputField
-          name="password"
-          type="password"
-          label="Password"
-          onInput={f.handleChange}
-          error={f.errors.password}
-        />
+        <FormControl label="E-mail" error={f.errors.email}>
+          <InputField name="email" type="email" onInput={f.handleChange} />
+        </FormControl>
+
+        <FormControl label="Password" error={f.errors.password}>
+          <InputField name="password" type="password" onInput={f.handleChange} />
+        </FormControl>
+
         <Button type="submit" isLoading={f.isSubmitting} disabled={f.isSubmitting} className="btn-primary my-4">
           Log In
         </Button>

@@ -33,7 +33,7 @@ export default function MonitorOptionMenu({ monitor, onPauseChange }: Props) {
     }
 
     setIsPausing(false);
-  }, [paused]);
+  }, [paused, monitor.id, onPauseChange]);
 
   const deleteMonitorHandler = useCallback(async () => {
     try {

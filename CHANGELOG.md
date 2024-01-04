@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/flowck/dobermann-webapp/compare/v1.21.0...v1.21.1) (2024-01-04)
+
+
+### Bug Fixes
+
+* address leftovers ([#45](https://github.com/flowck/dobermann-webapp/issues/45)) ([94281f9](https://github.com/flowck/dobermann-webapp/commit/94281f97cf209d71caec745deac5e99ff48ff52e))
+
 # [1.21.0](https://github.com/flowck/dobermann-webapp/compare/v1.20.0...v1.21.0) (2024-01-03)
 
 

@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/flowck/dobermann-webapp/compare/v1.21.1...v1.22.0) (2024-01-06)
+
+
+### Features
+
+* **#47:** list all incidents ([#48](https://github.com/flowck/dobermann-webapp/issues/48)) ([ef61146](https://github.com/flowck/dobermann-webapp/commit/ef6114649f1ccfa8fbf1be8e07fa16a7f68f9826)), closes [#47](https://github.com/flowck/dobermann-webapp/issues/47)
+
 ## [1.21.1](https://github.com/flowck/dobermann-webapp/compare/v1.21.0...v1.21.1) (2024-01-04)
 
 

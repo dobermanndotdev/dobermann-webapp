@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/flowck/dobermann-webapp/compare/v1.22.0...v1.23.0) (2024-01-06)
+
+
+### Features
+
+* **#71:** show how long a monitor has been up ([#49](https://github.com/flowck/dobermann-webapp/issues/49)) ([f61bce0](https://github.com/flowck/dobermann-webapp/commit/f61bce0738ddf6e4066a2fcf16f622046937b52a)), closes [#71](https://github.com/flowck/dobermann-webapp/issues/71) [#71](https://github.com/flowck/dobermann-webapp/issues/71) [#71](https://github.com/flowck/dobermann-webapp/issues/71)
+
 # [1.22.0](https://github.com/flowck/dobermann-webapp/compare/v1.21.1...v1.22.0) (2024-01-06)
 
 

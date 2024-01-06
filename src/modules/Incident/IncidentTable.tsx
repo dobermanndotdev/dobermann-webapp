@@ -26,7 +26,7 @@ export function IncidentTable({ incidents }: Props) {
       <TableHeader>
         <TableRow>
           <TableCol>Status</TableCol>
-          <TableCol>Cause</TableCol>
+          <TableCol>Checked URL</TableCol>
           <TableCol>Started at</TableCol>
           <TableCol>Duration</TableCol>
           <TableCol></TableCol>
@@ -41,7 +41,7 @@ export function IncidentTable({ incidents }: Props) {
                 {incident.resolved_at ? "Resolved" : "Ongoing"}
               </Badge>
             </TableCell>
-            <TableCell>{incident.cause}</TableCell>
+            <TableCell>{incident.checked_url}</TableCell>
             <TableCell>{Dates.format(incident.created_at, FULL_DATE_FORMAT)}</TableCell>
             <TableCell>{getDuration(incident.created_at, incident.resolved_at || "")}</TableCell>
             <TableCellLinkIcon />

@@ -11,7 +11,7 @@ import { apiClients, ssrApiClients } from "@@/common/libs/api";
 import { Monitor, ResponseTimeStat } from "@@/common/libs/apiClient";
 import { paths } from "@@/common/libs/contants";
 import { notify, notifyGenericError } from "@@/common/libs/errors";
-import { IncidentTable } from "@@/modules/Monitor/IncidentTable";
+import { IncidentTable } from "@@/modules/Incident/IncidentTable";
 import { LiveLastCheckedAt } from "@@/modules/Monitor/LiveLastCheckedAt";
 import MonitorOptionMenu from "@@/modules/Monitor/MonitorOptionMenu";
 import { ResponseTimeStatsChart } from "@@/modules/Monitor/ResponseTimeStatsChart";

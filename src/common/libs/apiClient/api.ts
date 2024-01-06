@@ -188,6 +188,43 @@ export interface GenericResponse {
 /**
  * 
  * @export
+ * @interface GetAllIncidentsPayload
+ */
+export interface GetAllIncidentsPayload {
+    /**
+     * 
+     * @type {Array<Incident>}
+     * @memberof GetAllIncidentsPayload
+     */
+    'data': Array<Incident>;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAllIncidentsPayload
+     */
+    'page': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAllIncidentsPayload
+     */
+    'per_page': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAllIncidentsPayload
+     */
+    'page_count': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetAllIncidentsPayload
+     */
+    'total_count': number;
+}
+/**
+ * 
+ * @export
  * @interface GetAllMonitorByIdPayload
  */
 export interface GetAllMonitorByIdPayload {
@@ -391,6 +428,12 @@ export interface Monitor {
      * @memberof Monitor
      */
     'last_checked_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Monitor
+     */
+    'up_since'?: string;
     /**
      * 
      * @type {number}
@@ -774,6 +817,50 @@ export const IncidentsApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
+         * @summary Get all incidents
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllIncidents: async (page?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/incidents`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get an incident by id
          * @param {string} incidentID 
          * @param {*} [options] Override http request option.
@@ -822,6 +909,20 @@ export const IncidentsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Get all incidents
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAllIncidents(page?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAllIncidentsPayload>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllIncidents(page, limit, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['IncidentsApi.getAllIncidents']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get an incident by id
          * @param {string} incidentID 
          * @param {*} [options] Override http request option.
@@ -845,6 +946,17 @@ export const IncidentsApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
+         * @summary Get all incidents
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllIncidents(page?: number, limit?: number, options?: any): AxiosPromise<GetAllIncidentsPayload> {
+            return localVarFp.getAllIncidents(page, limit, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get an incident by id
          * @param {string} incidentID 
          * @param {*} [options] Override http request option.
@@ -863,6 +975,19 @@ export const IncidentsApiFactory = function (configuration?: Configuration, base
  * @extends {BaseAPI}
  */
 export class IncidentsApi extends BaseAPI {
+    /**
+     * 
+     * @summary Get all incidents
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IncidentsApi
+     */
+    public getAllIncidents(page?: number, limit?: number, options?: AxiosRequestConfig) {
+        return IncidentsApiFp(this.configuration).getAllIncidents(page, limit, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary Get an incident by id

@@ -436,6 +436,12 @@ export interface Monitor {
     'up_since'?: string;
     /**
      * 
+     * @type {string}
+     * @memberof Monitor
+     */
+    'down_since'?: string;
+    /**
+     * 
      * @type {number}
      * @memberof Monitor
      */

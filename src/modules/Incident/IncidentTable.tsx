@@ -37,11 +37,9 @@ export function IncidentTable({ incidents }: Props) {
         {incidents.map((incident) => (
           <TableRow onClick={() => router.push(paths.toIncident(incident.id))} key={incident.id}>
             <TableCell>
-              {!incident.resolved_at && (
-                <Badge color={incident.resolved_at ? "green" : "red"}>
-                  {incident.resolved_at ? "Resolved" : "Ongoing"}
-                </Badge>
-              )}
+              <Badge color={incident.resolved_at ? "green" : "red"}>
+                {incident.resolved_at ? "Resolved" : "Ongoing"}
+              </Badge>
             </TableCell>
             <TableCell>{incident.cause}</TableCell>
             <TableCell>{Dates.format(incident.created_at, FULL_DATE_FORMAT)}</TableCell>

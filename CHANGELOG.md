@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/flowck/dobermann-webapp/compare/v1.23.0...v1.24.0) (2024-01-06)
+
+
+### Features
+
+* **#71:** add stat to show the uptime ([77686e7](https://github.com/flowck/dobermann-webapp/commit/77686e7671b65dcf49b274db1cc270f0f4128e93)), closes [#71](https://github.com/flowck/dobermann-webapp/issues/71) [#71](https://github.com/flowck/dobermann-webapp/issues/71)
+
 # [1.23.0](https://github.com/flowck/dobermann-webapp/compare/v1.22.0...v1.23.0) (2024-01-06)
 
 

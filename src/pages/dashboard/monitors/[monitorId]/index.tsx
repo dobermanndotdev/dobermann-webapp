@@ -76,7 +76,7 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
       </PageTitle>
 
       <Grid columns="3" gap="4" width="auto" mb="5">
-        <Stat label="Uptime" value={monitor.up_since ? Dates.fromNow(monitor.up_since, true) : "-"} />
+        <Stat label="Up for" value={monitor.up_since ? Dates.fromNow(monitor.up_since, true) : "-"} />
         <Stat label="Last checked at" value={<LiveLastCheckedAt value={monitor.last_checked_at || ""} />} />
         <Stat label="Incidents" value={monitor.incidents.length || 0} />
       </Grid>

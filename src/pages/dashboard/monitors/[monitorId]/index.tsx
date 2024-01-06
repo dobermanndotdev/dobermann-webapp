@@ -9,8 +9,8 @@ import { Text } from "@@/common/components/Text";
 import { DashboardLayout } from "@@/common/layouts/DashboardLayout/DashboardLayout";
 import { apiClients, ssrApiClients } from "@@/common/libs/api";
 import { Monitor, ResponseTimeStat } from "@@/common/libs/apiClient";
-import { paths } from "@@/common/libs/contants";
-import { notify, notifyGenericError } from "@@/common/libs/errors";
+import { Dates } from "@@/common/libs/dates";
+import { notify } from "@@/common/libs/errors";
 import { IncidentTable } from "@@/modules/Incident/IncidentTable";
 import { LiveLastCheckedAt } from "@@/modules/Monitor/LiveLastCheckedAt";
 import MonitorOptionMenu from "@@/modules/Monitor/MonitorOptionMenu";
@@ -19,8 +19,7 @@ import { useLiveMonitor } from "@@/modules/Monitor/hooks";
 import { formatCheckIntervalToMinutes } from "@@/modules/Monitor/lib";
 import { CheckIcon, Cross2Icon, PauseIcon } from "@radix-ui/react-icons";
 import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 interface Props {
   monitor: Monitor;
@@ -28,9 +27,7 @@ interface Props {
 }
 
 export default function MonitorPage({ monitor: initialData, responseTimeStats }: Props) {
-  const router = useRouter();
-  const [isDeleting, setIsDeleting] = useState(false);
-  const { monitor, isLoading, setMonitor } = useLiveMonitor(initialData);
+  const { monitor, setMonitor } = useLiveMonitor(initialData);
 
   const refreshMonitor = useCallback(async () => {
     try {
@@ -40,17 +37,6 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
       notify("Unable to refresh monitor. Please reload the page", { type: "error" });
     }
   }, [monitor.id, setMonitor]);
-
-  const onDeleteMonitorHandler = useCallback(async () => {
-    try {
-      setIsDeleting(true);
-      await apiClients().MonitorsApiFactory.deleteMonitor(monitor.id);
-      router.push(paths.monitors);
-    } catch (error) {
-      notifyGenericError();
-      setIsDeleting(false);
-    }
-  }, [router, monitor.id]);
 
   return (
     <DashboardLayout
@@ -89,7 +75,8 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
         </Flex>
       </PageTitle>
 
-      <Grid columns="2" gap="4" width="auto" mb="5">
+      <Grid columns="3" gap="4" width="auto" mb="5">
+        <Stat label="Uptime" value={monitor.up_since ? Dates.fromNow(monitor.up_since, true) : "-"} />
         <Stat label="Last checked at" value={<LiveLastCheckedAt value={monitor.last_checked_at || ""} />} />
         <Stat label="Incidents" value={monitor.incidents.length || 0} />
       </Grid>

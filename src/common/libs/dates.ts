@@ -29,7 +29,8 @@ dayjs.updateLocale("en", {
 
 export const Dates = {
   new: (date?: string | number) => dayjs(date),
-  fromNow: (date: string | Date) => dayjs(date).fromNow(),
+  fromNow: (date: string | Date, noSuffix = false) => dayjs(date).fromNow(noSuffix),
+  toNow: (date: string | Date) => dayjs(date).toNow(),
   format: (date: string | Date, format: string) => dayjs(date).format(format),
   duration: (timestamp: number) => dayjs.duration(timestamp),
 };

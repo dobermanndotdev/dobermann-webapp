@@ -1,3 +1,11 @@
+# [1.26.0](https://github.com/flowck/dobermann-webapp/compare/v1.25.0...v1.26.0) (2024-01-07)
+
+
+### Features
+
+* handle large screens ([#52](https://github.com/flowck/dobermann-webapp/issues/52)) ([205a92d](https://github.com/flowck/dobermann-webapp/commit/205a92ddcfbcd1ff0b2e12a952e5122dad0d98f1))
+* improve the auth layout ([#53](https://github.com/flowck/dobermann-webapp/issues/53)) ([0721390](https://github.com/flowck/dobermann-webapp/commit/0721390e9bf9a3e443f38ad77e2a280d84283252))
+
 # [1.25.0](https://github.com/flowck/dobermann-webapp/compare/v1.24.0...v1.25.0) (2024-01-07)
 
 

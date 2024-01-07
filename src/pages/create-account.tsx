@@ -1,7 +1,9 @@
 import { Button } from "@@/common/components/Button";
+import { Form } from "@@/common/components/Form";
 import { FormControl } from "@@/common/components/FormControl";
 import { Heading } from "@@/common/components/Heading";
 import { InputField } from "@@/common/components/InputField";
+import { Text } from "@@/common/components/Text";
 import { AuthLayout } from "@@/common/layouts/AuthLayout";
 import { apiClients } from "@@/common/libs/api";
 import { paths } from "@@/common/libs/contants";
@@ -36,8 +38,8 @@ export default function CreateAccountPage() {
 
   return (
     <AuthLayout title="Create an account">
-      <Heading>Get started with Dobbermann</Heading>
-      <form className="mt-4 flex flex-col gap-2" onSubmit={f.handleSubmit}>
+      <Heading mb="5">Get started with Dobbermann</Heading>
+      <Form className="mt-4 flex flex-col gap-2" onSubmit={f.handleSubmit}>
         <FormControl label="Account Name" error={f.errors.account_name}>
           <InputField name="account_name" onInput={f.handleChange} />
         </FormControl>
@@ -54,10 +56,10 @@ export default function CreateAccountPage() {
           Create account
         </Button>
 
-        <span className="block text-sm">
+        <Text size="2">
           Do you already have an account? <Link href="/login">Log in</Link>
-        </span>
-      </form>
+        </Text>
+      </Form>
     </AuthLayout>
   );
 }
@@ -68,16 +70,19 @@ type FormFields = typeof initialFields;
 
 function validator(values: FormFields) {
   const errors: Partial<Record<keyof FormFields, string>> = {};
+
   if (!values.account_name) {
     errors.account_name = "Account name cannot be empty";
   }
 
   if (!values.email) {
-    errors.email = "Account name cannot be empty";
+    errors.email = "E-mail cannot be empty";
   }
 
   if (!values.password) {
-    errors.password = "Account name cannot be empty";
+    errors.password = "Password cannot be empty";
+  } else if (values.password.length < 12) {
+    errors.password = "Password cannot less than 12 characters";
   }
 
   return errors;

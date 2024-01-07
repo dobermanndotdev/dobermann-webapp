@@ -24,6 +24,12 @@ const Content = styled.section`
 
 const View = styled.section`
   padding: ${(p) => p.theme.space.md};
+
+  // 1024 + 264 (view width + sidebar width)
+  @media screen and (min-width: 1264px) {
+    width: 1024px;
+    margin: 0 auto;
+  }
 `;
 
 export function DashboardLayout({ children, title, breadcrumbs = true, breadcrumbReplacer }: Props) {

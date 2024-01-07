@@ -1,7 +1,8 @@
+import { Badge } from "@@/common/components/Badge";
 import { Text } from "@@/common/components/Text";
 import { paths } from "@@/common/libs/contants";
 import styled from "@emotion/styled";
-import { ExclamationTriangleIcon, HomeIcon, LaptopIcon, PersonIcon } from "@radix-ui/react-icons";
+import { ExclamationTriangleIcon, HomeIcon, LaptopIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -12,6 +13,9 @@ export function Drawer() {
     <Base>
       <LogoLink href={paths.home}>
         <Text size="4">Dobermann</Text>
+        <BetaBadge color="orange">
+          <Text size="1"> Beta</Text>
+        </BetaBadge>
       </LogoLink>
 
       <Menu>
@@ -32,11 +36,18 @@ const links = [
   { label: "Home", icon: <HomeIcon />, path: paths.home },
   { label: "Monitors", icon: <LaptopIcon />, path: paths.monitors },
   { label: "Incidents", icon: <ExclamationTriangleIcon />, path: paths.incidents },
-  { label: "Users", icon: <PersonIcon />, path: "/dashboard/users" },
+  // { label: "Users", icon: <PersonIcon />, path: "/dashboard/users" },
 ];
 
+const BetaBadge = styled(Badge)`
+  height: 20px;
+`;
+
 const LogoLink = styled(Link)`
+  display: flex;
+  align-items: center;
   text-decoration: none;
+  gap: ${(p) => p.theme.space.xs};
   font-size: ${(p) => p.theme.text.xs};
   color: ${(p) => p.theme.colors.white};
 `;

@@ -57,9 +57,9 @@ export function AccountMenu() {
         </div>
         <UserEmail>{user?.email}</UserEmail>
       </DropdownLabel>
-      <DropdownSeparator />
+      {/* <DropdownSeparator />
       <DropdownItem>User settings</DropdownItem>
-      <DropdownItem>Account settings</DropdownItem>
+      <DropdownItem>Account settings</DropdownItem> */}
       <DropdownSeparator />
       <DropdownItem onClick={logoutHandler}>Log out</DropdownItem>
     </Dropdown>

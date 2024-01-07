@@ -1,8 +1,10 @@
 import { Alert } from "@@/common/components/Alert";
 import { Button } from "@@/common/components/Button";
+import { Form } from "@@/common/components/Form";
 import { FormControl } from "@@/common/components/FormControl";
 import { Heading } from "@@/common/components/Heading";
 import { InputField } from "@@/common/components/InputField";
+import { Text } from "@@/common/components/Text";
 import { AuthLayout } from "@@/common/layouts/AuthLayout";
 import { apiClients, ssrApiClients } from "@@/common/libs/api";
 import { COOKIE_AUTH_TOKEN, LOCALSTORAGE_AUTH_TOKEN, paths } from "@@/common/libs/contants";
@@ -47,11 +49,11 @@ export default function LoginPage() {
 
   return (
     <AuthLayout title="Log in">
-      <Heading>Log in to Dobbermann</Heading>
+      <Heading mb="5">Log in to Dobbermann</Heading>
 
       {isAccountCreated && <Alert className="mt-4 alert-success">You account has been created successfully!</Alert>}
 
-      <form className="mt-4 flex flex-col gap-2" onSubmit={f.handleSubmit}>
+      <Form className="mt-4 flex flex-col gap-2" onSubmit={f.handleSubmit}>
         <FormControl label="E-mail" error={f.errors.email}>
           <InputField name="email" type="email" onInput={f.handleChange} />
         </FormControl>
@@ -63,10 +65,10 @@ export default function LoginPage() {
         <Button type="submit" isLoading={f.isSubmitting} disabled={f.isSubmitting} className="btn-primary my-4">
           Log In
         </Button>
-        <span className="block text-sm">
+        <Text size="2">
           {"Don't"} have an account? <Link href="/create-account">Create one</Link>
-        </span>
-      </form>
+        </Text>
+      </Form>
     </AuthLayout>
   );
 }
@@ -84,6 +86,8 @@ function validator(values: FormFields) {
 
   if (!values.password) {
     errors.password = "Password cannot be empty";
+  } else if (values.password.length < 12) {
+    errors.password = "Password cannot less than 12 characters";
   }
 
   return errors;

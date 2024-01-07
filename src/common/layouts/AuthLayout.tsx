@@ -1,5 +1,7 @@
 import { PropsWithChildren } from "react";
+import { Card } from "../components/Card";
 import { Meta } from "../components/Meta";
+import { styled } from "../styles/emotion";
 
 interface Props extends PropsWithChildren {
   title: string;
@@ -7,11 +9,21 @@ interface Props extends PropsWithChildren {
 
 export function AuthLayout({ children, title }: Props) {
   return (
-    <>
+    <Container>
       <Meta title={title} />
-      <div className="w-full flex justify-center items-center h-screen">
-        <div className="w-11/12 md:w-2/4 lg:w-[400px] border px-8 py-10">{children}</div>
-      </div>
-    </>
+      <AuthContainer size="5">{children}</AuthContainer>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+`;
+
+const AuthContainer = styled(Card)`
+  width: 420px;
+`;

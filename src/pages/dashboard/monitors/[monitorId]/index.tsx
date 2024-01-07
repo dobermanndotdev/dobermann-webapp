@@ -1,8 +1,10 @@
 import { Badge } from "@@/common/components/Badge";
+import { Callout } from "@@/common/components/Callout";
 import { Card } from "@@/common/components/Card";
 import { Flex } from "@@/common/components/Flex";
 import { Grid } from "@@/common/components/Grid";
 import { Heading } from "@@/common/components/Heading";
+import { NoSSR } from "@@/common/components/NoSSR";
 import { PageTitle } from "@@/common/components/PageTitle";
 import { Stat } from "@@/common/components/Stat";
 import { Text } from "@@/common/components/Text";
@@ -76,7 +78,7 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
       </PageTitle>
 
       <Grid columns="3" gap="4" width="auto" mb="5">
-        {monitor.up_since && <Stat label="Up for" value={Dates.fromNow(monitor.up_since, true)} />}
+        {monitor.up_since && <Stat label="Up for" value={<NoSSR>{Dates.fromNow(monitor.up_since, true)}</NoSSR>} />}
         {monitor.down_since && <Stat label="Down for" value={Dates.fromNow(monitor.down_since, true)} />}
         <Stat label="Last checked at" value={<LiveLastCheckedAt value={monitor.last_checked_at || ""} />} />
         <Stat label="Incidents" value={monitor.incidents.length || 0} />
@@ -94,7 +96,11 @@ export default function MonitorPage({ monitor: initialData, responseTimeStats }:
       <Heading size="4" mb="2">
         Incidents
       </Heading>
-      <IncidentTable incidents={monitor.incidents} />
+      {monitor.incidents.length > 0 ? (
+        <IncidentTable incidents={monitor.incidents} />
+      ) : (
+        <Callout content="So far this monitor hasn't had any incident." color="green" />
+      )}
     </DashboardLayout>
   );
 }

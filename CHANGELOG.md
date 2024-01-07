@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/flowck/dobermann-webapp/compare/v1.24.0...v1.25.0) (2024-01-07)
+
+
+### Features
+
+* show callout when a monitor hasn't had an incident ([#51](https://github.com/flowck/dobermann-webapp/issues/51)) ([a5e1dec](https://github.com/flowck/dobermann-webapp/commit/a5e1decc3d92ed73ba4b30639d63b0a4c6a58de3))
+
 # [1.24.0](https://github.com/flowck/dobermann-webapp/compare/v1.23.0...v1.24.0) (2024-01-06)
 
 

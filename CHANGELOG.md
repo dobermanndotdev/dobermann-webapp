@@ -1,3 +1,15 @@
+# [1.27.0](https://github.com/flowck/dobermann-webapp/compare/v1.26.0...v1.27.0) (2024-01-14)
+
+
+### Bug Fixes
+
+* tagging version ([#58](https://github.com/flowck/dobermann-webapp/issues/58)) ([5fbab14](https://github.com/flowck/dobermann-webapp/commit/5fbab1401a145cf312ad5ea09c8ad5fa514cc41c))
+
+
+### Features
+
+* handle changes on the incident model ([caa64b4](https://github.com/flowck/dobermann-webapp/commit/caa64b4cbdf84f7c2c8119a099c05a0cb0379317))
+
 # [1.26.0](https://github.com/flowck/dobermann-webapp/compare/v1.25.0...v1.26.0) (2024-01-07)
 
 

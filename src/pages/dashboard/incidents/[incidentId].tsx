@@ -11,7 +11,6 @@ import { ssrApiClients } from "@@/common/libs/api";
 import { FullIncident, Monitor } from "@@/common/libs/apiClient";
 import { FULL_DATE_FORMAT, paths } from "@@/common/libs/contants";
 import { Dates } from "@@/common/libs/dates";
-import { CheckResponseModal } from "@@/modules/Incident/CheckResponseModal";
 import { getDuration } from "@@/modules/Incident/lib";
 import { GetServerSideProps } from "next";
 
@@ -56,31 +55,6 @@ export default function IncidentPage({ incident, monitor }: Props) {
           <Card>
             <Code color="gray">{incident.checked_url}</Code>
           </Card>
-        </div>
-
-        <div>
-          <Heading size="4" mb="2">
-            Request headers
-          </Heading>
-          <Card>
-            <Code color="gray">{incident.request_headers}</Code>
-          </Card>
-        </div>
-
-        <div>
-          <Heading size="4" mb="2">
-            Response headers
-          </Heading>
-          <Card title="Response headers">
-            <Code color="gray">{incident.response_headers}</Code>
-          </Card>
-        </div>
-
-        <div>
-          <Heading size="4" mb="2">
-            Response
-          </Heading>
-          <CheckResponseModal content={incident.response_body} />
         </div>
       </Grid>
     </DashboardLayout>

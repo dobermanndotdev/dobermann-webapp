@@ -149,28 +149,10 @@ export interface FullIncident {
     'monitor_id': string;
     /**
      * 
-     * @type {string}
-     * @memberof FullIncident
-     */
-    'response_headers': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FullIncident
-     */
-    'request_headers': string;
-    /**
-     * 
      * @type {number}
      * @memberof FullIncident
      */
-    'response_status': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof FullIncident
-     */
-    'response_body': string;
+    'response_status'?: number;
 }
 /**
  * 

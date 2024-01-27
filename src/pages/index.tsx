@@ -1,6 +1,7 @@
 import { ButtonLink } from "@@/common/components/ButtonLink";
 import { Meta } from "@@/common/components/Meta";
 import { paths } from "@@/common/libs/contants";
+import { GetServerSideProps } from "next";
 
 export default function HomePage() {
   return (
@@ -23,3 +24,12 @@ export default function HomePage() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  return {
+    redirect: {
+      permanent: false,
+      destination: paths.home,
+    },
+  };
+};

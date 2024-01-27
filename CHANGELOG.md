@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/flowck/dobermann-webapp/compare/v1.27.0...v1.28.0) (2024-01-27)
+
+
+### Features
+
+* redirect to the dashboard ([#60](https://github.com/flowck/dobermann-webapp/issues/60)) ([665531e](https://github.com/flowck/dobermann-webapp/commit/665531e3ae766652d40435a0b1ac902fb3013e8f))
+
 # [1.27.0](https://github.com/flowck/dobermann-webapp/compare/v1.26.0...v1.27.0) (2024-01-14)
 
 

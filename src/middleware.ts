@@ -1,23 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
-import { COOKIE_AUTH_TOKEN, paths } from "./common/libs/contants";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-export const middleware = async (request: NextRequest) => {
-  const url = new URL(request.url);
+const isProtectedRoute = createRouteMatcher(["/dashboard(.*)", "/forum(.*)"]);
 
-  if (url.pathname.startsWith("/dashboard") && !request.cookies.get(COOKIE_AUTH_TOKEN)) {
-    return NextResponse.redirect(new URL(paths.login, request.url));
+export default clerkMiddleware((auth, req) => {
+  if (isProtectedRoute(req)) {
+    auth().protect();
   }
-
-  if (url.pathname === "/dashboard") {
-    return NextResponse.redirect(new URL(paths.home, request.url));
-  }
-
-  return NextResponse.next();
-};
+});
 
 export const config = {
-  matcher: [
-    // skip these
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
-  ],
+  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };

@@ -4,25 +4,26 @@ import { Form } from "@@/common/components/Form";
 import { FormControl } from "@@/common/components/FormControl";
 import { Heading } from "@@/common/components/Heading";
 import { InputField } from "@@/common/components/InputField";
+import { Link } from "@@/common/components/Link";
 import { Text } from "@@/common/components/Text";
 import { AuthLayout } from "@@/common/layouts/AuthLayout";
 import { apiClients, ssrApiClients } from "@@/common/libs/api";
 import { COOKIE_AUTH_TOKEN, LOCALSTORAGE_AUTH_TOKEN, paths } from "@@/common/libs/contants";
 import { handleApiErrors, notify } from "@@/common/libs/errors";
-import { FormikHelpers, useFormik } from "formik";
+import { formValidator } from "@@/common/libs/forms";
+import { useFormik } from "formik";
 import { GetServerSideProps } from "next";
-import Link from "next/link";
+
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
 
 export default function LoginPage() {
   const params = useSearchParams();
+  const router = useRouter();
   const isAccountCreated = params.get("account-created") === "1";
 
-  const router = useRouter();
-
-  const handler = useCallback(
-    async (values: FormFields, { setSubmitting }: FormikHelpers<FormFields>) => {
+  const f = useFormik({
+    validationSchema,
+    onSubmit: async (values, { setSubmitting }) => {
       try {
         setSubmitting(true);
         const { data } = await apiClients().AuthApiFactory.login(values);
@@ -38,20 +39,15 @@ export default function LoginPage() {
         setSubmitting(false);
       }
     },
-    [router]
-  );
-
-  const f = useFormik({
-    onSubmit: handler,
-    validate: validator,
+    validateOnChange: false,
     initialValues: initialFields,
   });
 
   return (
     <AuthLayout title="Log in">
-      <Heading mb="5">Log in to Dobbermann</Heading>
+      <Heading mb="5">Log in to Dobermann</Heading>
 
-      {isAccountCreated && <Alert className="mt-4 alert-success">You account has been created successfully!</Alert>}
+      {isAccountCreated && <Alert className="mt-4 alert-success">Your account has been created successfully!</Alert>}
 
       <Form className="mt-4 flex flex-col gap-2" onSubmit={f.handleSubmit}>
         <FormControl label="E-mail" error={f.errors.email}>
@@ -111,3 +107,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     return { props: {} };
   }
 };
+
+function validationSchema() {
+  return formValidator.object().shape({
+    email: formValidator.string().email().required(),
+    password: formValidator.string().min(12).required(),
+  });
+}

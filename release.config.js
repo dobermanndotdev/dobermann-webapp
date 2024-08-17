@@ -8,5 +8,5 @@ module.exports = {
     "@semantic-release/git",
     "@semantic-release/github",
   ],
-  repositoryUrl: "https://github.com/flowck/dobermann-webapp.git",
+  repositoryUrl: "https://github.com/dobermanndotdev/dobermann-webapp.git",
 };
